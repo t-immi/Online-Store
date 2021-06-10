@@ -1,0 +1,154 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="kandakov (generated)" id="1623143118518-1">
+        <createTable tableName="categories">
+            <column autoIncrement="true" name="categoriesid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="categories_pkey"/>
+            </column>
+            <column name="categoriesname" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-2">
+        <createTable tableName="product_categories">
+            <column autoIncrement="true" name="productcategories" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_categories_pkey"/>
+            </column>
+            <column name="productid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categories" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-3">
+        <createTable tableName="order_list">
+            <column autoIncrement="true" name="orderlistid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="order_list_pkey"/>
+            </column>
+            <column name="productid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orderid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-4">
+        <createTable tableName="orders">
+            <column autoIncrement="true" name="ordersid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="orders_pkey"/>
+            </column>
+            <column name="userid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orderslist" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reckoning" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-5">
+        <createTable tableName="products">
+            <column autoIncrement="true" name="productid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="products_pkey"/>
+            </column>
+            <column name="label" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-6">
+        <createTable tableName="shopping_list">
+            <column autoIncrement="true" name="shoppinglistid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="shopping_list_pkey"/>
+            </column>
+            <column name="productid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productamt" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-7">
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="roleid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="roles_pkey"/>
+            </column>
+            <column name="rolename" type="CHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-8">
+        <createTable tableName="user_roles">
+            <column autoIncrement="true" name="userrolesid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_roles_pkey"/>
+            </column>
+            <column name="userid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roleid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-9">
+        <createTable tableName="shopping_cart">
+            <column autoIncrement="true" name="shoppingcartid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="shopping_cart_pkey"/>
+            </column>
+            <column name="userid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shopplistid" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-10">
+        <createTable tableName="customers">
+            <column autoIncrement="true" name="userid" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="secondname" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-11">
+        <addForeignKeyConstraint baseColumnNames="categories" baseTableName="product_categories" constraintName="categoriesid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="categoriesid" referencedTableName="categories" validate="true"/>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-12">
+        <addForeignKeyConstraint baseColumnNames="productid" baseTableName="order_list" constraintName="productid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="productid" referencedTableName="products" validate="true"/>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-13">
+        <addForeignKeyConstraint baseColumnNames="shopplistid" baseTableName="shopping_cart" constraintName="shopplistid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="shoppinglistid" referencedTableName="shopping_list" validate="true"/>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-14">
+        <addForeignKeyConstraint baseColumnNames="roleid" baseTableName="user_roles" constraintName="roleid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="roleid" referencedTableName="roles" validate="true"/>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-15">
+        <addForeignKeyConstraint baseColumnNames="orderid" baseTableName="order_list" constraintName="orderid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ordersid" referencedTableName="orders" validate="true"/>
+    </changeSet>
+    <changeSet author="kandakov (generated)" id="1623143118518-16">
+        <addForeignKeyConstraint baseColumnNames="userid" baseTableName="orders" constraintName="userid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="userid" referencedTableName="customers" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
