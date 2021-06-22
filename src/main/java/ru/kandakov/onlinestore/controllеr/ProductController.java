@@ -25,8 +25,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("product", productDAO.show(id));
+    public String show(@PathVariable("id") long id, Model model) {
+        model.addAttribute("product", productDAO.show((int) id));
         return "product/show";
     }
 

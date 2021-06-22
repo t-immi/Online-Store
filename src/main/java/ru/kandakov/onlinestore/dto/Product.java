@@ -1,12 +1,12 @@
 package ru.kandakov.onlinestore.dto;
 
 public class Product {
-    private int productId;
+    private Long id;
     private String label;
     private int price;
 
-    public int getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
     public String getLabel() {
@@ -17,8 +17,8 @@ public class Product {
         return price;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setLabel(String label) {
@@ -29,8 +29,8 @@ public class Product {
         this.price = price;
     }
 
-    public Product(int productId, String label, int price) {
-        this.productId = productId;
+    public Product(Long id, String label, int price) {
+        this.id = id;
         this.label = label;
         this.price = price;
 
