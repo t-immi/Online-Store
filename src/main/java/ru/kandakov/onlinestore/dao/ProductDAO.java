@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Component
 public class ProductDAO {
-    private static int PRODUCT_COUNT;
+    private static long PRODUCT_COUNT;
     private List<Product> products = new ArrayList<>();
     {
         products = new ArrayList<>();
@@ -21,6 +21,6 @@ public class ProductDAO {
     }
 
     public Product show(int id) {
-        return products.stream().filter(person -> person.getProductId() == id).findAny().orElse(null);
+        return products.stream().filter(person -> person.getId() == id).findAny().orElse(null);
     }
 }
