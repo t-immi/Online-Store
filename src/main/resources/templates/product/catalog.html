@@ -5,10 +5,7 @@
     <title>список товаров</title>
 </head>
 <body>
-
-<p>проверка проверка</p>
-
-<div th:each="product : ${product}">
+<div th:each="product : ${products}">
     <a th:href="@{/product/{id}(id=${product.getId()})}" th:text="${product.getLabel()}">product</a>
 </div>
 

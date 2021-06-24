@@ -1,8 +1,16 @@
 package ru.kandakov.onlinestore.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Product {
     private Long id;
+
+    @NotNull(message = "Label should not be empty")
+    @Size(min = 2, max = 50, message = "Name should be between 2 and 50 charters ")
     private String label;
+    @Min(value = 0, message = "price should be more than 0")
     private int price;
 
     public Long getId() {
