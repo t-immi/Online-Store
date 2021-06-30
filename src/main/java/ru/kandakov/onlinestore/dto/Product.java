@@ -1,17 +1,31 @@
 package ru.kandakov.onlinestore.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productid", nullable = false, updatable = false, unique = true)
     private Long id;
 
-    @NotNull(message = "Label should not be empty")
-    @Size(min = 2, max = 50, message = "Name should be between 2 and 50 charters ")
+    @Column(name = "label", nullable = false)
     private String label;
-    @Min(value = 0, message = "price should be more than 0")
+
+    @Column(name = "price"/*, nullable = false*/)
     private int price;
+
+    public Product() {
+
+    }
+
+    public Product(Long id, String label, int price) {
+        this.id = id;
+        this.label = label;
+        this.price = price;
+
+    }
 
     public Long getId() {
         return id;
@@ -25,22 +39,11 @@ public class Product {
         return price;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setLabel(String label) {
         this.label = label;
     }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public Product(Long id, String label, int price) {
-        this.id = id;
-        this.label = label;
-        this.price = price;
-
     }
 }

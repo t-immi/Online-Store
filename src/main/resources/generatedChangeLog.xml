@@ -1,5 +1,8 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet author="kandakov (generated)" id="1623143118518-1">
         <createTable tableName="categories">
             <column autoIncrement="true" name="categoriesid" type="INTEGER">
@@ -134,21 +137,35 @@
         </createTable>
     </changeSet>
     <changeSet author="kandakov (generated)" id="1623143118518-11">
-        <addForeignKeyConstraint baseColumnNames="categories" baseTableName="product_categories" constraintName="categoriesid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="categoriesid" referencedTableName="categories" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="categories" baseTableName="product_categories"
+                                 constraintName="categoriesid" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="categoriesid"
+                                 referencedTableName="categories" validate="true"/>
     </changeSet>
     <changeSet author="kandakov (generated)" id="1623143118518-12">
-        <addForeignKeyConstraint baseColumnNames="productid" baseTableName="order_list" constraintName="productid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="productid" referencedTableName="products" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="productid" baseTableName="order_list" constraintName="productid"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="productid" referencedTableName="products" validate="true"/>
     </changeSet>
     <changeSet author="kandakov (generated)" id="1623143118518-13">
-        <addForeignKeyConstraint baseColumnNames="shopplistid" baseTableName="shopping_cart" constraintName="shopplistid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="shoppinglistid" referencedTableName="shopping_list" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="shopplistid" baseTableName="shopping_cart"
+                                 constraintName="shopplistid" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="shoppinglistid"
+                                 referencedTableName="shopping_list" validate="true"/>
     </changeSet>
     <changeSet author="kandakov (generated)" id="1623143118518-14">
-        <addForeignKeyConstraint baseColumnNames="roleid" baseTableName="user_roles" constraintName="roleid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="roleid" referencedTableName="roles" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="roleid" baseTableName="user_roles" constraintName="roleid"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="roleid" referencedTableName="roles" validate="true"/>
     </changeSet>
     <changeSet author="kandakov (generated)" id="1623143118518-15">
-        <addForeignKeyConstraint baseColumnNames="orderid" baseTableName="order_list" constraintName="orderid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ordersid" referencedTableName="orders" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="orderid" baseTableName="order_list" constraintName="orderid"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ordersid" referencedTableName="orders" validate="true"/>
     </changeSet>
     <changeSet author="kandakov (generated)" id="1623143118518-16">
-        <addForeignKeyConstraint baseColumnNames="userid" baseTableName="orders" constraintName="userid" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="userid" referencedTableName="customers" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="userid" baseTableName="orders" constraintName="userid"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="userid" referencedTableName="customers" validate="true"/>
     </changeSet>
 </databaseChangeLog>

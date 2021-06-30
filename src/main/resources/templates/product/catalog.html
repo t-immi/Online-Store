@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:each="product : ${products}">
-    <a th:href="@{/product/{id}(id=${product.getId()})}" th:text="${product.getLabel()}">product</a>
+    <a th:href="@{/read/{id}(id=${product.getId()})}" th:text="${product.getLabel()}">product</a>
 </div>
 
 </body>
