@@ -49,5 +49,4 @@ public class ProductController {
         productRepository.delete(product);
         return product;
     }
-
 }

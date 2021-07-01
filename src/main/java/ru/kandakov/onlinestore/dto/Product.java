@@ -39,6 +39,10 @@ public class Product {
         return price;
     }
 
+    public void setId(Long id){
+        this.id = id;
+    }
+
     public void setLabel(String label) {
         this.label = label;
     }
