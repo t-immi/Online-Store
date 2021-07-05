@@ -1,6 +1,7 @@
 package ru.kandakov.onlinestore.dto;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "shopping_cart_goods")
@@ -19,9 +20,8 @@ public class ShoppingCartGoods {
     @OneToOne(optional=false, mappedBy="shoppingCartGoods")
     private ShoppingCart shoppingCart;
 
-//    @OneToMany (mappedBy = "shoppingCartGoods", fetch = FetchType.LAZY) // LAZY
-//    @JsonManagedReference
-//    private List<Product> products; //List
+    @OneToMany (mappedBy = "shoppingCartGoods", fetch = FetchType.LAZY)
+    private Collection<Product> products;
 
     public ShoppingCartGoods() {
     }

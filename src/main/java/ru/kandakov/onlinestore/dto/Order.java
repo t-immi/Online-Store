@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Online_order") //Таблицу нельзя называть order
+@Table(name = "online_order") //Таблицу нельзя называть order
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,17 @@ public class Order {
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Customer customer;
+
+    @OneToOne(optional = false,cascade = CascadeType.ALL)
+    @JoinColumn (name = "order_goods_id")
+    private OrderGoods orderGoods;
+
+//    @OneToMany (mappedBy = "online_order", fetch = FetchType.EAGER)
+//    private Collection<OrderGoods> orderGoods;
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "online_order")
+//    @JsonManagedReference
+//    private Set<OrderGoods> orderGoodsSet = new HashSet<>();
 
     public Order() {
     }
@@ -76,5 +87,17 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public OrderGoods getOrderGoods() {
+        return orderGoods;
+    }
+
+    public void setOrderGoods(OrderGoods orderGoods) {
+        this.orderGoods = orderGoods;
+    }
+
+    public Order(OrderGoods orderGoods) {
+        this.orderGoods = orderGoods;
     }
 }

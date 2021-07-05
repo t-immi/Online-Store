@@ -22,7 +22,7 @@ public class Customer {
     @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
-    @OneToMany (mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "customer", fetch = FetchType.LAZY)
     private Collection<Order> orders;
 
     public Customer() {

@@ -16,9 +16,13 @@ public class Product {
     @Column(name = "price"/*, nullable = false*/)
     private int price;
 
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "product_id")    //, insertable = false, updatable = false
-//    private ShoppingCartGoods shoppingCartGoods;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private ShoppingCartGoods shoppingCartGoods;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private OrderGoods orderGoods;
 
     public Product() {
 
@@ -53,5 +57,29 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public ShoppingCartGoods getShoppingCartGoods() {
+        return shoppingCartGoods;
+    }
+
+    public void setShoppingCartGoods(ShoppingCartGoods shoppingCartGoods) {
+        this.shoppingCartGoods = shoppingCartGoods;
+    }
+
+    public OrderGoods getOrderGoods() {
+        return orderGoods;
+    }
+
+    public void setOrderGoods(OrderGoods orderGoods) {
+        this.orderGoods = orderGoods;
     }
 }
