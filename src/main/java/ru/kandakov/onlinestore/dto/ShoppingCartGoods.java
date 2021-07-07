@@ -11,10 +11,10 @@ public class ShoppingCartGoods {
     @Column(name = "shopping_cart_goods_id", nullable = false, updatable = false, unique = true)
     private Long shoppingCartGoodsId;
 
-    @Column(name = "shopping_cart_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "shopping_cart_id", nullable = false, updatable = false, unique = false)
     private Long shoppingCartId;
 
-    @Column(name = "product_id",  nullable = false, updatable = false, unique = true)
+    @Column(name = "product_id",  nullable = false, updatable = false, unique = false)
     private Long productId;
 
     @OneToOne(optional=false, mappedBy="shoppingCartGoods")
@@ -58,11 +58,15 @@ public class ShoppingCartGoods {
         this.shoppingCart = shoppingCart;
     }
 
-//    public List<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(List<Product> products) {
-//        this.products = products;
-//    }
+    public ShoppingCartGoods(Collection<Product> products) {
+        this.products = products;
+    }
+
+    public Collection<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
+    }
 }

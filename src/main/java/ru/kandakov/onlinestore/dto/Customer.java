@@ -14,6 +14,9 @@ public class Customer {
     @Column(name = "role_id", nullable = false, updatable = false, unique = true)
     private Long roleId;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @ManyToOne (optional = false, cascade = CascadeType.ALL)
     @JoinColumn (name = "role_id", insertable = false, updatable = false) //role_id
     private Role role;
@@ -51,6 +54,14 @@ public class Customer {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ShoppingCart getShoppingCart() {

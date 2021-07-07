@@ -11,10 +11,10 @@ public class OrderGoods {
     @Column(name = "order_goods_id", nullable = false, updatable = false, unique = true)
     private Long orderGoodsId;
 
-    @Column(name = "order_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "order_id", nullable = false, updatable = false, unique = false)
     private Long orderId;
 
-    @Column(name = "product_id")
+    @Column(name = "product_id", nullable = false, updatable = false, unique = false)
     private Long productId;
 
     @OneToOne(optional = false, mappedBy = "orderGoods")
@@ -22,15 +22,6 @@ public class OrderGoods {
 
     @OneToMany (mappedBy = "orderGoods", fetch = FetchType.LAZY)
     private Collection<Product> products;
-
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
-//    private Order order;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "order_goods_id", referencedColumnName = "order_id", insertable = false, updatable = false)
-//    @JsonBackReference
-//    private Order order;
 
     public OrderGoods() {
 
