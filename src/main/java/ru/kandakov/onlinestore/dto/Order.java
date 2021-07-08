@@ -24,9 +24,6 @@ public class Order {
     @Column(name = "status", nullable = false, updatable = false, unique = true)
     private String status;
 
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "order_id", insertable = false, updatable = false)
-//    private Customer customer;
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Collection<Customer> customers;
 

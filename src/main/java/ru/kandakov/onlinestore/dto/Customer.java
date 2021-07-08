@@ -17,18 +17,13 @@ public class Customer {
     @Column(name = "name", nullable = false)
     private String name;
 
-//    @ManyToOne (optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn (name = "role_id", insertable = false, updatable = false) //role_id
-//    private Role role;
-    @OneToMany(mappedBy = "customer", fetch =  FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch =  FetchType.EAGER)
     private Collection<Role> roles;
 
     @OneToOne (optional=false, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
-//    @OneToMany (mappedBy = "customer", fetch = FetchType.LAZY)
-//    private Collection<Order> orders;
     @ManyToOne (optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Order order;

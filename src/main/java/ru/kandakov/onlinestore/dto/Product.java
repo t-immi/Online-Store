@@ -17,15 +17,9 @@ public class Product {
     @Column(name = "price"/*, nullable = false*/)
     private int price;
 
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "product_id", insertable = false, updatable = false)
-//    private ShoppingCartGoods shoppingCartGoods;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Collection<OrderGoods> orderGoods;
 
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "product_id", insertable = false, updatable = false)
-//    private OrderGoods orderGoods;
     @OneToMany (mappedBy = "product", fetch = FetchType.LAZY)
     private Collection<ShoppingCartGoods> shoppingCartGoods;
 
@@ -42,6 +36,10 @@ public class Product {
         this.orderGoods = orderGoods;
 
         this.shoppingCartGoods = shoppingCartGoods;
+    }
+
+    public Product() {
+
     }
 
     public Collection<OrderGoods> getOrderGoods() {

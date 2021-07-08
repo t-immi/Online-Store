@@ -19,8 +19,6 @@ public class OrderGoods {
     @OneToOne(optional = false, mappedBy = "orderGoods")
     private Order order;
 
-//    @OneToMany (mappedBy = "orderGoods", fetch = FetchType.LAZY)
-//    private Collection<Product> products;
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
     private Product product;

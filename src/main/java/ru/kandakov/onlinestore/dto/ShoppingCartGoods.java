@@ -19,8 +19,6 @@ public class ShoppingCartGoods {
     @OneToOne(optional=false, mappedBy="shoppingCartGoods")
     private ShoppingCart shoppingCart;
 
-//    @OneToMany (mappedBy = "shoppingCartGoods", fetch = FetchType.LAZY)
-//    private Collection<Product> products;
     @ManyToOne (optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "shopping_cart_goods_id", insertable = false, updatable = false)
     private Product product;

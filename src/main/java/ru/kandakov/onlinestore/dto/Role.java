@@ -13,11 +13,10 @@ public class Role {
     @Column(name = "role", nullable = false, updatable = true, unique = true)
     private String role;
 
-//    @OneToMany(mappedBy = "role", fetch=FetchType.EAGER) //role_id
-//    private Collection<Customer> users;
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
 
     public Role(Customer customer) {
         this.customer = customer;
