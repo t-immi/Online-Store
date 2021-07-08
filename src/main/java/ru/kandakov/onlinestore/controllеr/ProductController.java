@@ -23,27 +23,27 @@ public class ProductController {
         return "product/catalog";
     }
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/product/read/{id}")
     public String show(@PathVariable("id") long id, Model model) {
         model.addAttribute("product", productRepository.getById(id));
         return "product/show";
     }
 
-    @PutMapping("/create")
+    @PutMapping("/product/create")
     @ResponseBody
     public Product save(@RequestBody Product product) {
         productRepository.save(product);
         return product;
     }
 
-    @PatchMapping("/update")
+    @PatchMapping("/product/update")
     @ResponseBody
     public Product update(@RequestBody Product product) {
         productRepository.save(product);
         return product;
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/product/delete")
     @ResponseBody
     public Product delete(@RequestBody Product product) {
         productRepository.delete(product);
