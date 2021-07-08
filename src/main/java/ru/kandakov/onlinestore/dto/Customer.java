@@ -17,19 +17,29 @@ public class Customer {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne (optional = false, cascade = CascadeType.ALL)
-    @JoinColumn (name = "role_id", insertable = false, updatable = false) //role_id
-    private Role role;
+//    @ManyToOne (optional = false, cascade = CascadeType.ALL)
+//    @JoinColumn (name = "role_id", insertable = false, updatable = false) //role_id
+//    private Role role;
+    @OneToMany(mappedBy = "customer", fetch =  FetchType.LAZY)
+    private Collection<Role> roles;
 
     @OneToOne (optional=false, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
-    @OneToMany (mappedBy = "customer", fetch = FetchType.LAZY)
-    private Collection<Order> orders;
+//    @OneToMany (mappedBy = "customer", fetch = FetchType.LAZY)
+//    private Collection<Order> orders;
+    @ManyToOne (optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    private Order order;
 
-    public Customer() {
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     public Long getCustomerId() {
@@ -48,14 +58,6 @@ public class Customer {
         this.roleId = roleId;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public String getName() {
         return name;
     }
@@ -72,11 +74,4 @@ public class Customer {
         this.shoppingCart = shoppingCart;
     }
 
-    public Collection<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Collection<Order> orders) {
-        this.orders = orders;
-    }
 }

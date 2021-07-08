@@ -1,6 +1,7 @@
 package ru.kandakov.onlinestore.dto;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "products")
@@ -16,23 +17,47 @@ public class Product {
     @Column(name = "price"/*, nullable = false*/)
     private int price;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", insertable = false, updatable = false)
-    private ShoppingCartGoods shoppingCartGoods;
+//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+//    private ShoppingCartGoods shoppingCartGoods;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private Collection<OrderGoods> orderGoods;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", insertable = false, updatable = false)
-    private OrderGoods orderGoods;
+//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+//    private OrderGoods orderGoods;
+    @OneToMany (mappedBy = "product", fetch = FetchType.LAZY)
+    private Collection<ShoppingCartGoods> shoppingCartGoods;
 
-    public Product() {
+    public Product(Collection<OrderGoods> orderGoods, Collection<ShoppingCartGoods> shoppingCartGoods) {
+        this.orderGoods = orderGoods;
 
+        this.shoppingCartGoods = shoppingCartGoods;
     }
 
-    public Product(Long product_id, String label, int price) {
+    public Product(Long product_id, String label, int price, Collection<OrderGoods> orderGoods, Collection<ShoppingCartGoods> shoppingCartGoods) {
         this.productId = product_id;
         this.label = label;
         this.price = price;
+        this.orderGoods = orderGoods;
 
+        this.shoppingCartGoods = shoppingCartGoods;
+    }
+
+    public Collection<OrderGoods> getOrderGoods() {
+        return orderGoods;
+    }
+
+    public void setOrderGoods(Collection<OrderGoods> orderGoods) {
+        this.orderGoods = orderGoods;
+    }
+
+    public Collection<ShoppingCartGoods> getShoppingCartGoods() {
+        return shoppingCartGoods;
+    }
+
+    public void setShoppingCartGoods(Collection<ShoppingCartGoods> shoppingCartGoods) {
+        this.shoppingCartGoods = shoppingCartGoods;
     }
 
     public Long getProduct_id() {
@@ -67,19 +92,4 @@ public class Product {
         this.productId = productId;
     }
 
-    public ShoppingCartGoods getShoppingCartGoods() {
-        return shoppingCartGoods;
-    }
-
-    public void setShoppingCartGoods(ShoppingCartGoods shoppingCartGoods) {
-        this.shoppingCartGoods = shoppingCartGoods;
-    }
-
-    public OrderGoods getOrderGoods() {
-        return orderGoods;
-    }
-
-    public void setOrderGoods(OrderGoods orderGoods) {
-        this.orderGoods = orderGoods;
-    }
 }

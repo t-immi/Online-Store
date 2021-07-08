@@ -1,7 +1,6 @@
 package ru.kandakov.onlinestore.dto;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Table(name = "order_goods")
@@ -20,8 +19,11 @@ public class OrderGoods {
     @OneToOne(optional = false, mappedBy = "orderGoods")
     private Order order;
 
-    @OneToMany (mappedBy = "orderGoods", fetch = FetchType.LAZY)
-    private Collection<Product> products;
+//    @OneToMany (mappedBy = "orderGoods", fetch = FetchType.LAZY)
+//    private Collection<Product> products;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
+    private Product product;
 
     public OrderGoods() {
 
@@ -63,15 +65,4 @@ public class OrderGoods {
         this.order = order;
     }
 
-    public OrderGoods(Collection<Product> products) {
-        this.products = products;
-    }
-
-    public Collection<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
-    }
 }
