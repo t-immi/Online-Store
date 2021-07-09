@@ -2,9 +2,7 @@ package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.ShoppingCart;
 import ru.kandakov.onlinestore.repository.ShoppingCartRepository;
 
@@ -21,6 +19,20 @@ public class ShoppingCartController {
     @ResponseBody
     public ShoppingCart save(@RequestBody ShoppingCart shoppingCart) {
         shoppingCartRepository.save(shoppingCart);
+        return shoppingCart;
+
+    }
+    @PatchMapping("/shopping_cart/update")
+    @ResponseBody
+    public ShoppingCart update(@RequestBody ShoppingCart shoppingCart) {
+        shoppingCartRepository.save(shoppingCart);
+        return shoppingCart;
+    }
+
+    @DeleteMapping("/shopping_cart/delete")
+    @ResponseBody
+    public ShoppingCart delete(@RequestBody ShoppingCart shoppingCart) {
+        shoppingCartRepository.delete(shoppingCart);
         return shoppingCart;
     }
 }

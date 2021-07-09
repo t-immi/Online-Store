@@ -1,11 +1,15 @@
 package ru.kandakov.onlinestore.dto;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
-public class Customer {
+public class Customer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
@@ -17,24 +21,41 @@ public class Customer {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "customer", fetch =  FetchType.EAGER)
-    private Collection<Role> roles;
+    @Column
+    private String password;
+
+    @Transient
+    private String passwordConfirm;
+
+//    @OneToMany(mappedBy = "customer", fetch =  FetchType.EAGER)
+//    private Collection<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     @OneToOne (optional=false, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
-    @ManyToOne (optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-    private Order order;
+//    @ManyToOne (optional = false, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+//    private Order order;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private Collection<Order> orders;
 
+    public Customer() {
 
-    public Collection<Role> getRoles() {
-        return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public Long getCustomerId() {
@@ -69,4 +90,38 @@ public class Customer {
         this.shoppingCart = shoppingCart;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

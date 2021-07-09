@@ -1,7 +1,6 @@
 package ru.kandakov.onlinestore.dto;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -24,14 +23,25 @@ public class Order {
     @Column(name = "status", nullable = false, updatable = false, unique = true)
     private String status;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private Collection<Customer> customers;
+//    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+//    private Collection<Customer> customers;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    private Customer customer;
 
     @OneToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn (name = "order_goods_id")
     private OrderGoods orderGoods;
 
     public Order() {
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Long getOrderId() {

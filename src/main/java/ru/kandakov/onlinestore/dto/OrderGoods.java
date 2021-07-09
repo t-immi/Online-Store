@@ -16,7 +16,7 @@ public class OrderGoods {
     @Column(name = "product_id", nullable = false, updatable = false, unique = false)
     private Long productId;
 
-    @OneToOne(optional = false, mappedBy = "orderGoods")
+    @OneToOne(optional = true, mappedBy = "orderGoods")
     private Order order;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)

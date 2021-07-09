@@ -28,10 +28,26 @@ public class CustomerController {
         model.addAttribute("customer", customerRepository.findById(id));
         return "customer/show";
     }
+
+    @PutMapping("/customer/create")
+    @ResponseBody
+    public Customer save(@RequestBody Customer customer) {
+        customerRepository.save(customer);
+        return customer;
+    }
+
     @PatchMapping("customer/update")
     @ResponseBody
     public Customer update(@RequestBody Customer customer) {
         customerRepository.save(customer);
         return customer;
     }
+
+    @DeleteMapping("/customer/delete")
+    @ResponseBody
+    public Customer delete(@RequestBody Customer customer) {
+        customerRepository.delete(customer);
+        return customer;
+    }
+
 }
