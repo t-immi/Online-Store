@@ -16,7 +16,7 @@ public class ShoppingCartGoods {
     @Column(name = "product_id",  nullable = false, updatable = false, unique = false)
     private Long productId;
 
-    @OneToOne(optional=false, mappedBy="shoppingCartGoods")
+    @OneToOne(optional=true, mappedBy="shoppingCartGoods")
     private ShoppingCart shoppingCart;
 
     @ManyToOne (optional = false, cascade = CascadeType.ALL)

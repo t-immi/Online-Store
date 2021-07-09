@@ -13,12 +13,11 @@ public class ShoppingCart {
     @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
     private Long customerId;
 
+    @OneToOne (optional=true, cascade=CascadeType.ALL)
+    private ShoppingCartGoods shoppingCartGoods;
+
     @OneToOne(optional = false, mappedBy="shoppingCart")
     private Customer customer;
-
-    @OneToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name = "shopping_cart_goods_id")
-    private ShoppingCartGoods shoppingCartGoods;
 
     public ShoppingCart() {
 

@@ -5,15 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.repository.OrderRepository;
+import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 
 @Controller
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final ShoppingCartGoodsRepository shoppingCartGoodsRepository;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, ShoppingCartGoodsRepository shoppingCartGoodsRepository) {
         this.orderRepository = orderRepository;
+        this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
     }
     @PutMapping("/order/create")
     @ResponseBody
