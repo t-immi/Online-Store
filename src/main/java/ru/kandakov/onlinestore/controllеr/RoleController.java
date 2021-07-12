@@ -1,12 +1,11 @@
 package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Role;
 import ru.kandakov.onlinestore.repository.RoleRepository;
 
-@Controller
+@RestController
 public class RoleController {
 
      private final RoleRepository roleRepository;

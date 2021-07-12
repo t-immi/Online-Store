@@ -1,13 +1,13 @@
 package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Product;
 import ru.kandakov.onlinestore.repository.ProductRepository;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class ProductController {
 
     private final ProductRepository productRepository;
@@ -18,15 +18,13 @@ public class ProductController {
     }
 
     @GetMapping("/product-catalog")
-    public String outputProducts(Model model) {
-        model.addAttribute("products", productRepository.findAll());
-        return "product/catalog";
+    public List<Product> outputProducts() {
+        return productRepository.findAll();
     }
 
     @GetMapping("/product/read/{id}")
-    public String show(@PathVariable("id") long id, Model model) {
-        model.addAttribute("product", productRepository.getById(id));
-        return "product/show";
+    public Product show(@PathVariable long id) {
+        return productRepository.getById(id);
     }
 
     @PutMapping("/product/create")

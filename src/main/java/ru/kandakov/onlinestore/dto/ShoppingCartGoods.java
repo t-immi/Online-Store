@@ -1,5 +1,7 @@
 package ru.kandakov.onlinestore.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,10 +19,11 @@ public class ShoppingCartGoods {
     private Long productId;
 
     @OneToOne(optional=true, mappedBy="shoppingCartGoods")
+    @JsonManagedReference
     private ShoppingCart shoppingCart;
 
     @ManyToOne (optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "shopping_cart_goods_id", insertable = false, updatable = false)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
 
     public ShoppingCartGoods(Product product) {

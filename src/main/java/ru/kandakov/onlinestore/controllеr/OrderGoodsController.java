@@ -1,12 +1,11 @@
 package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.OrderGoods;
 import ru.kandakov.onlinestore.repository.OrderGoodsRepository;
 
-@Controller
+@RestController
 public class OrderGoodsController {
 
     private final OrderGoodsRepository orderGoodsRepository;

@@ -1,14 +1,14 @@
 package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.ShoppingCart;
 import ru.kandakov.onlinestore.repository.OrderRepository;
 import ru.kandakov.onlinestore.repository.ShoppingCartRepository;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class ShoppingCartController {
 
     private final ShoppingCartRepository shoppingCartRepository;
@@ -21,9 +21,8 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/shopping-cart-catalog")
-    public String outputShoppingCart(Model model) {
-        model.addAttribute("shopping_cart", shoppingCartRepository.findAll());
-        return "shoppingCart/show";
+    public List<ShoppingCart> outputShoppingCart() {
+        return shoppingCartRepository.findAll();
     }
 
     @PutMapping("shopping_cart/create")

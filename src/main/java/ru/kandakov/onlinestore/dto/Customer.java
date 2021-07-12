@@ -15,7 +15,7 @@ public class Customer implements UserDetails {
     @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
     private Long customerId;
 
-    @Column(name = "role_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "role_id", nullable = false, updatable = false, unique = false)
     private Long roleId;
 
     @Column(name = "name", nullable = false)
@@ -27,8 +27,6 @@ public class Customer implements UserDetails {
     @Transient
     private String passwordConfirm;
 
-//    @OneToMany(mappedBy = "customer", fetch =  FetchType.EAGER)
-//    private Collection<Role> roles;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
@@ -36,9 +34,6 @@ public class Customer implements UserDetails {
     @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
-//    @ManyToOne (optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-//    private Order order;
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private Collection<Order> orders;
 

@@ -1,13 +1,14 @@
 package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Customer;
 import ru.kandakov.onlinestore.repository.CustomerRepository;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
 public class CustomerController {
 
     private final CustomerRepository customerRepository;
@@ -18,15 +19,15 @@ public class CustomerController {
     }
 
     @GetMapping("/users")
-    public String outputUsers(Model model){
-        model.addAttribute("customers", customerRepository.findAll());
-        return "customer/list";
+    @ResponseBody
+    public List<Customer> outputUsers(){
+        return customerRepository.findAll();
     }
 
     @GetMapping("customer/read/{id}")
-    public String show(@PathVariable("id") long id, Model model){
-        model.addAttribute("customer", customerRepository.findById(id));
-        return "customer/show";
+    @ResponseBody
+    public Optional<Customer> show(@PathVariable long id){
+        return customerRepository.findById(id);
     }
 
     @PutMapping("/customer/create")
