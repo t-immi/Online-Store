@@ -1,5 +1,7 @@
 package ru.kandakov.onlinestore.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -18,25 +20,12 @@ public class Product {
     private int price;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Collection<OrderGoods> orderGoods;
 
     @OneToMany (mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Collection<ShoppingCartGoods> shoppingCartGoods;
-
-    public Product(Collection<OrderGoods> orderGoods, Collection<ShoppingCartGoods> shoppingCartGoods) {
-        this.orderGoods = orderGoods;
-
-        this.shoppingCartGoods = shoppingCartGoods;
-    }
-
-    public Product(Long product_id, String label, int price, Collection<OrderGoods> orderGoods, Collection<ShoppingCartGoods> shoppingCartGoods) {
-        this.productId = product_id;
-        this.label = label;
-        this.price = price;
-        this.orderGoods = orderGoods;
-
-        this.shoppingCartGoods = shoppingCartGoods;
-    }
 
     public Product() {
 

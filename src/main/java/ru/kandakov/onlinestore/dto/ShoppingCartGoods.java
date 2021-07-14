@@ -1,6 +1,6 @@
 package ru.kandakov.onlinestore.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
@@ -19,16 +19,13 @@ public class ShoppingCartGoods {
     private Long productId;
 
     @OneToOne(optional=true, mappedBy="shoppingCartGoods")
-    @JsonManagedReference
+    @JsonBackReference
     private ShoppingCart shoppingCart;
 
     @ManyToOne (optional = false, cascade = CascadeType.ALL)
+    @JsonBackReference
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
-
-    public ShoppingCartGoods(Product product) {
-        this.product = product;
-    }
 
     public ShoppingCartGoods() {
 
@@ -40,6 +37,14 @@ public class ShoppingCartGoods {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     public Long getShoppingCartGoodsId() {
@@ -65,13 +70,4 @@ public class ShoppingCartGoods {
     public void setProductId(Long productId) {
         this.productId = productId;
     }
-
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
 }

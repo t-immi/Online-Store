@@ -6,6 +6,8 @@ import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.repository.OrderRepository;
 import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 
+import java.util.List;
+
 @RestController
 public class OrderController {
 
@@ -16,6 +18,12 @@ public class OrderController {
     public OrderController(OrderRepository orderRepository, ShoppingCartGoodsRepository shoppingCartGoodsRepository) {
         this.orderRepository = orderRepository;
         this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
+    }
+
+    @GetMapping("/orders")
+    @ResponseBody
+    public List<Order> outputOrders(){
+        return orderRepository.findAll();
     }
     @PutMapping("/order/create")
     @ResponseBody

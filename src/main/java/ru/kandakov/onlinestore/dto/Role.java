@@ -13,21 +13,14 @@ public class Role implements GrantedAuthority {
     @Column(name = "role_id", nullable = false, updatable = false, unique = true)
     private Long roleId;
 
-    @Column(name = "role", nullable = false, updatable = true, unique = true)
+    @Column(name = "role", nullable = false, updatable = false, unique = true)
     private String role;
 
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "customer_id")
-//    private Customer customer;
     @ManyToMany(mappedBy = "roles")
     public Set<Customer> customers;
 
     public Role() {
 
-    }
-
-    public Role(Set<Customer> customers) {
-        this.customers = customers;
     }
 
     public Set<Customer> getCustomers() {

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.ShoppingCartGoods;
 import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 
+import java.util.List;
+
 @RestController
 public class ShoppingCartGoodsController {
 
@@ -14,6 +16,13 @@ public class ShoppingCartGoodsController {
     public ShoppingCartGoodsController(ShoppingCartGoodsRepository shoppingCartGoodsRepository) {
         this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
     }
+
+    @GetMapping("/shopping_cart_goods_catalog")
+    @ResponseBody
+    public List<ShoppingCartGoods> outputShoppingCartGoods(){
+        return shoppingCartGoodsRepository.findAll();
+    }
+
     @PutMapping("/shopping_cart_goods/create")
     @ResponseBody
     public ShoppingCartGoods save(@RequestBody  ShoppingCartGoods shoppingCartGoods) {

@@ -1,5 +1,7 @@
 package ru.kandakov.onlinestore.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,7 +17,7 @@ public class Customer implements UserDetails {
     @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
     private Long customerId;
 
-    @Column(name = "role_id", nullable = false, updatable = false, unique = false)
+    @Column(name = "role_id", nullable = false, updatable = false)
     private Long roleId;
 
     @Column(name = "name", nullable = false)
@@ -30,10 +32,12 @@ public class Customer implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @JsonManagedReference
     @OneToOne (optional=false, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private Collection<Order> orders;
 
@@ -61,14 +65,6 @@ public class Customer implements UserDetails {
         this.customerId = customerId;
     }
 
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
     public String getName() {
         return name;
     }
@@ -83,6 +79,30 @@ public class Customer implements UserDetails {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

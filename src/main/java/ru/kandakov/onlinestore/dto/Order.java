@@ -1,5 +1,7 @@
 package ru.kandakov.onlinestore.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,24 +13,21 @@ public class Order {
     @Column(name = "order_id", nullable = false, updatable = false, unique = true)
     private Long orderId;
 
-    @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
-    private Long customerId;
+    @Column(name = "sum", nullable = false, updatable = false, unique = true)
+    private int sum;
+
+    @Column(name = "status", updatable = false, unique = true)
+    private String status;
 
     @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)
     private Date dateOfCreation;
 
-    @Column(name = "sum", nullable = false, updatable = false, unique = true)
-    private int sum;
-
-    @Column(name = "status", nullable = false, updatable = false, unique = true)
-    private String status;
-
-//    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-//    private Collection<Customer> customers;
+    @JsonBackReference
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Customer customer;
 
+    @JsonBackReference
     @OneToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn (name = "order_goods_id")
     private OrderGoods orderGoods;
@@ -50,14 +49,6 @@ public class Order {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
     }
 
     public Date getDateOfCreation() {

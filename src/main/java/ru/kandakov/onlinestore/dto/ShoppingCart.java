@@ -1,8 +1,10 @@
 package ru.kandakov.onlinestore.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "shopping_cart")
@@ -12,20 +14,28 @@ public class ShoppingCart {
     @Column(name = "shoppingCart_id", nullable = false, updatable = false, unique = true)
     private Long shoppingCartId;
 
-    @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
-    private Long customerId;
+    @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)
+    private Date dateOfCreation = new Date();
 
-    @OneToOne (optional=true, cascade=CascadeType.ALL)
+    @OneToOne (optional = false, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_goods_id")
     @JsonManagedReference
     private ShoppingCartGoods shoppingCartGoods;
 
+    @JsonBackReference
     @OneToOne(optional = false, mappedBy="shoppingCart")
-    @JsonManagedReference
     private Customer customer;
 
     public ShoppingCart() {
 
+    }
+
+    public Date getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    public void setDateOfCreation(Date dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
     }
 
     public Long getShoppingCartId() {
@@ -34,14 +44,6 @@ public class ShoppingCart {
 
     public void setShoppingCartId(Long shoppingCartId) {
         this.shoppingCartId = shoppingCartId;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
     }
 
     public Customer getCustomer() {

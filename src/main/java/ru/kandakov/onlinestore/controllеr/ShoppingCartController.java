@@ -3,6 +3,7 @@ package ru.kandakov.onlinestore.controllеr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.ShoppingCart;
+import ru.kandakov.onlinestore.repository.OrderGoodsRepository;
 import ru.kandakov.onlinestore.repository.OrderRepository;
 import ru.kandakov.onlinestore.repository.ShoppingCartRepository;
 
@@ -13,14 +14,16 @@ public class ShoppingCartController {
 
     private final ShoppingCartRepository shoppingCartRepository;
     private final OrderRepository orderRepository;
+    private final OrderGoodsRepository orderGoodsRepository;
 
     @Autowired
-    public ShoppingCartController(ShoppingCartRepository shoppingCartRepository, OrderRepository orderRepository) {
+    public ShoppingCartController(ShoppingCartRepository shoppingCartRepository, OrderRepository orderRepository, OrderGoodsRepository orderGoodsRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.orderRepository = orderRepository;
+        this.orderGoodsRepository = orderGoodsRepository;
     }
 
-    @GetMapping("/shopping-cart-catalog")
+    @GetMapping("/shopping_cart_catalog")
     public List<ShoppingCart> outputShoppingCart() {
         return shoppingCartRepository.findAll();
     }

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.OrderGoods;
 import ru.kandakov.onlinestore.repository.OrderGoodsRepository;
 
+import java.util.List;
+
 @RestController
 public class OrderGoodsController {
 
@@ -14,6 +16,13 @@ public class OrderGoodsController {
     public OrderGoodsController(OrderGoodsRepository orderGoodsRepository) {
         this.orderGoodsRepository = orderGoodsRepository;
     }
+
+    @GetMapping("/order_goods")
+    @ResponseBody
+    public List<OrderGoods> outputOrderGoods(){
+        return orderGoodsRepository.findAll();
+    }
+
     @PutMapping("/order_goods/create")
     @ResponseBody
     public OrderGoods save(@RequestBody OrderGoods orderGoods) {

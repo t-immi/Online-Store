@@ -1,5 +1,8 @@
 package ru.kandakov.onlinestore.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,10 +19,12 @@ public class OrderGoods {
     @Column(name = "product_id", nullable = false, updatable = false, unique = false)
     private Long productId;
 
+    @JsonManagedReference
     @OneToOne(optional = true, mappedBy = "orderGoods")
     private Order order;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JsonBackReference
     @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
     private Product product;
 

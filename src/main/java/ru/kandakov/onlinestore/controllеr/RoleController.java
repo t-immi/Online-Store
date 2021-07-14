@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Role;
 import ru.kandakov.onlinestore.repository.RoleRepository;
 
+import java.util.List;
+
 @RestController
 public class RoleController {
 
@@ -13,6 +15,12 @@ public class RoleController {
      @Autowired
      public RoleController(RoleRepository roleRepository) {
          this.roleRepository = roleRepository;
+     }
+
+     @GetMapping("/roles")
+     @ResponseBody
+     public List<Role> outputRoles(){
+         return roleRepository.findAll();
      }
 
     @PutMapping("/role/create")
