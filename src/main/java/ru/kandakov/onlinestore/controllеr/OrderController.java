@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.repository.OrderRepository;
-import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 
 import java.util.List;
 
@@ -12,12 +11,10 @@ import java.util.List;
 public class OrderController {
 
     private final OrderRepository orderRepository;
-    private final ShoppingCartGoodsRepository shoppingCartGoodsRepository;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository, ShoppingCartGoodsRepository shoppingCartGoodsRepository) {
+    public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
     }
 
     @GetMapping("/orders")
