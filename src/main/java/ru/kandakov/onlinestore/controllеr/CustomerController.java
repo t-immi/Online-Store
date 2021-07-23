@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/customer")
 public class CustomerController {
 
     private final CustomerRepository customerRepository;
@@ -24,27 +25,27 @@ public class CustomerController {
         return customerRepository.findAll();
     }
 
-    @GetMapping("customer/read/{id}")
+    @GetMapping("/read/{id}")
     @ResponseBody
     public Optional<Customer> show(@PathVariable long id){
         return customerRepository.findById(id);
     }
 
-    @PutMapping("/customer/create")
+    @PutMapping("/create")
     @ResponseBody
     public Customer save(@RequestBody Customer customer) {
         customerRepository.save(customer);
         return customer;
     }
 
-    @PatchMapping("customer/update")
+    @PatchMapping("/update")
     @ResponseBody
     public Customer update(@RequestBody Customer customer) {
         customerRepository.save(customer);
         return customer;
     }
 
-    @DeleteMapping("/customer/delete")
+    @DeleteMapping("/delete")
     @ResponseBody
     public Customer delete(@RequestBody Customer customer) {
         customerRepository.delete(customer);
