@@ -22,12 +22,13 @@ public class Order {
     @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)
     private Date dateOfCreation;
 
-    @JsonBackReference
+    @JsonBackReference(value = "customer-order")
+//    @JsonManagedReference
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Customer customer;
 
-    @JsonBackReference
+    @JsonBackReference(value = "orderGoods-order")
     @OneToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn (name = "order_goods_id")
     private OrderGoods orderGoods;

@@ -20,11 +20,11 @@ public class Product {
     private int price;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference(value = "product-orderGoods")
     private Collection<OrderGoods> orderGoods;
 
     @OneToMany (mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference(value = "product-shoppingCartGoods")
     private Collection<ShoppingCartGoods> shoppingCartGoods;
 
     public Product() {

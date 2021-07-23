@@ -17,12 +17,12 @@ public class ShoppingCart {
     @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)
     private Date dateOfCreation = new Date();
 
+    @JsonManagedReference(value = "shoppingCartGoods-ShoppingCart")
     @OneToOne (optional = false, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_goods_id")
-    @JsonManagedReference
     private ShoppingCartGoods shoppingCartGoods;
 
-    @JsonBackReference
+    @JsonBackReference (value = "customer-shoppingCart")
     @OneToOne(optional = false, mappedBy="shoppingCart")
     private Customer customer;
 

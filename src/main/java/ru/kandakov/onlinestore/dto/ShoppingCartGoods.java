@@ -19,11 +19,11 @@ public class ShoppingCartGoods {
     private Long productId;
 
     @OneToOne(optional=true, mappedBy="shoppingCartGoods")
-    @JsonBackReference
+    @JsonBackReference(value = "shoppingCartGoods-ShoppingCart")
     private ShoppingCart shoppingCart;
 
     @ManyToOne (optional = false, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference(value = "product-shoppingCartGoods")
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
 

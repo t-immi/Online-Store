@@ -19,12 +19,12 @@ public class OrderGoods {
     @Column(name = "product_id", nullable = false, updatable = false, unique = false)
     private Long productId;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "orderGoods-order")
     @OneToOne(optional = true, mappedBy = "orderGoods")
     private Order order;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference(value = "product-orderGoods")
     @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
     private Product product;
 
