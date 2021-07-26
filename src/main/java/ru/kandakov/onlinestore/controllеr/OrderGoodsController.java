@@ -6,7 +6,7 @@ import ru.kandakov.onlinestore.dto.OrderGoods;
 import ru.kandakov.onlinestore.repository.OrderGoodsRepository;
 
 import java.util.List;
-
+@RequestMapping("/order_goods")
 @RestController
 public class OrderGoodsController {
 
@@ -17,27 +17,27 @@ public class OrderGoodsController {
         this.orderGoodsRepository = orderGoodsRepository;
     }
 
-    @GetMapping("/order_goods")
+    @GetMapping("")
     @ResponseBody
     public List<OrderGoods> outputOrderGoods(){
         return orderGoodsRepository.findAll();
     }
 
-    @PutMapping("/order_goods/create")
+    @PutMapping("/create")
     @ResponseBody
     public OrderGoods save(@RequestBody OrderGoods orderGoods) {
         orderGoodsRepository.save(orderGoods);
         return orderGoods;
     }
 
-    @PatchMapping("/order_goods/update")
+    @PatchMapping("/update")
     @ResponseBody
     public OrderGoods update(@RequestBody OrderGoods orderGoods) {
         orderGoodsRepository.save(orderGoods);
         return orderGoods;
     }
 
-    @DeleteMapping("/order_goods/delete")
+    @DeleteMapping("/delete")
     @ResponseBody
     public OrderGoods delete(@RequestBody OrderGoods orderGoods) {
         orderGoodsRepository.delete(orderGoods);
