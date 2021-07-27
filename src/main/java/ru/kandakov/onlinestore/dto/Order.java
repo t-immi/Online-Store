@@ -23,7 +23,6 @@ public class Order {
     private Date dateOfCreation;
 
     @JsonBackReference(value = "customer-order")
-//    @JsonManagedReference
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Customer customer;

@@ -21,13 +21,13 @@ public class CustomerController {
 
     @GetMapping("/users")
     @ResponseBody
-    public List<Customer> outputUsers(){
+    public List<Customer> outputUsers() {
         return customerRepository.findAll();
     }
 
     @GetMapping("/read/{id}")
     @ResponseBody
-    public Optional<Customer> show(@PathVariable long id){
+    public Optional<Customer> show(@PathVariable long id) {
         return customerRepository.findById(id);
     }
 
@@ -51,5 +51,4 @@ public class CustomerController {
         customerRepository.delete(customer);
         return customer;
     }
-
 }

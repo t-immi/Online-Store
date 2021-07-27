@@ -53,4 +53,9 @@ public class ProductController {
         productRepository.delete(product);
         return product;
     }
+
+    @GetMapping("/read/min/{label}")
+    public List<Product> readMinPrice(@PathVariable String label){
+        return productRepository.findAllByLabelOrderByPriceAsc(label);
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -35,6 +36,28 @@ public class ProductControllerTests {
 
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/product/read/1");
+
+        mockMvc.perform(builder)
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void testForSuccessfulDelete () throws Exception {
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .delete("/product/delete")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"productIg\": null, \"label\": \"TestLabel2\", \"price\": 130}");
+
+        mockMvc.perform(builder)
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void testForSuccessfulReturnMinProductPrice () throws Exception {
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .get("/product/read/min/TestLabel");
 
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());

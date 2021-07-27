@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HelloController {
 
     @GetMapping("/online-store")
-    public String outputHello(){
+    public String outputHello() {
         return "product/firstPage";
     }
 }

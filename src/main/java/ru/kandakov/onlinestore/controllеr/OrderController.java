@@ -6,6 +6,7 @@ import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.repository.OrderRepository;
 
 import java.util.List;
+
 @RequestMapping("/order")
 @RestController
 public class OrderController {
@@ -19,9 +20,10 @@ public class OrderController {
 
     @GetMapping("")
     @ResponseBody
-    public List<Order> outputOrders(){
+    public List<Order> outputOrders() {
         return orderRepository.findAll();
     }
+
     @PutMapping("/create")
     @ResponseBody
     public Order save(@RequestBody Order order) {

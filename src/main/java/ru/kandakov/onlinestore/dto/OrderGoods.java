@@ -56,6 +56,14 @@ public class OrderGoods {
         this.productId = productId;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public Order getOrder() {
         return order;
     }

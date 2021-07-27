@@ -68,4 +68,24 @@ public class CustomerControllerTests {
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
+    @Test
+    public void testForSuccessfulUserDelete () throws Exception {
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .delete("/customer/delete")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"customerId\":1,\"roleId\":1,\"name\":\"TestName\"}");
+
+        mockMvc.perform(builder)
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    @Test
+    public void testForUnSuccessfulUserDelete () throws Exception {
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .delete("/customer/delete")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("набор символов498903");
+
+        mockMvc.perform(builder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }
