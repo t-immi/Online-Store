@@ -13,10 +13,10 @@ public class OrderGoods {
     @Column(name = "order_goods_id", nullable = false, updatable = false, unique = true)
     private Long orderGoodsId;
 
-    @Column(name = "order_id", nullable = false, updatable = false, unique = false)
+    @Column(name = "order_id", nullable = true, updatable = false)
     private Long orderId;
 
-    @Column(name = "product_id", nullable = false, updatable = false, unique = false)
+    @Column(name = "product_id", nullable = false, updatable = false)
     private Long productId;
 
     @JsonManagedReference(value = "orderGoods-order")

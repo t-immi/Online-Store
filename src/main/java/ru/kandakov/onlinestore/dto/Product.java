@@ -47,7 +47,7 @@ public class Product {
         this.shoppingCartGoods = shoppingCartGoods;
     }
 
-    public Long getProduct_id() {
+    public Long getProductId() {
         return productId;
     }
 
@@ -59,8 +59,8 @@ public class Product {
         return price;
     }
 
-    public void setId(Long product_id){
-        this.productId = product_id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public void setLabel(String label) {
@@ -71,12 +71,6 @@ public class Product {
         this.price = price;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
 
 }

@@ -12,10 +12,10 @@ public class CustomerRoles {
     @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long id;
 
-    @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "customer_id", nullable = false, updatable = false, unique = false)
     private Long customerId;
 
-    @Column(name = "role_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "role_id", nullable = false, updatable = false, unique = false)
     private Long roleId;
 
     @ManyToOne(fetch = FetchType.LAZY)

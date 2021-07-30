@@ -28,7 +28,7 @@ public class Order {
     private Customer customer;
 
     @JsonBackReference(value = "orderGoods-order")
-    @OneToOne(optional = false,cascade = CascadeType.ALL)
+    @OneToOne(optional = true,cascade = CascadeType.ALL)
     @JoinColumn (name = "order_goods_id")
     private OrderGoods orderGoods;
 

@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class ShoppingCartGoods {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shopping_cart_goods_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long shoppingCartGoodsId;
 
     @Column(name = "shopping_cart_id", nullable = false, updatable = false, unique = false)
@@ -18,8 +18,9 @@ public class ShoppingCartGoods {
     @Column(name = "product_id",  nullable = false, updatable = false, unique = false)
     private Long productId;
 
-    @OneToOne(optional=true, mappedBy="shoppingCartGoods")
     @JsonBackReference(value = "shoppingCartGoods-ShoppingCart")
+    @OneToOne(optional = false, mappedBy="shoppingCartGoods")
+    @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
     @ManyToOne (optional = false, cascade = CascadeType.ALL)

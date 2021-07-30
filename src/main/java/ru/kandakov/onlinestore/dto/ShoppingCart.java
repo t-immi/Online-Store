@@ -11,14 +11,14 @@ import java.util.Date;
 public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shoppingCart_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long shoppingCartId;
 
     @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)
     private Date dateOfCreation = new Date();
 
     @JsonManagedReference(value = "shoppingCartGoods-ShoppingCart")
-    @OneToOne (optional = false, cascade=CascadeType.ALL)
+    @OneToOne (optional = true, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_goods_id")
     private ShoppingCartGoods shoppingCartGoods;
 

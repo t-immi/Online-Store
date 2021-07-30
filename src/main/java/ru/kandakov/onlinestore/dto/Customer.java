@@ -15,9 +15,6 @@ public class Customer /*implements UserDetails*/ {
     @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
     private Long customerId;
 
-    @Column(name = "role_id", updatable = false)
-    private Long roleId;
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -29,7 +26,7 @@ public class Customer /*implements UserDetails*/ {
 
     @JsonManagedReference(value = "customer-shoppingCart")
     @OneToOne (optional = false, cascade=CascadeType.ALL)
-    @JoinTable(name = "customer_shoppingCart", joinColumns = @JoinColumn(name = "shopping_cart_id"))
+//    @JoinTable(name = "customer_shoppingCart", joinColumns = @JoinColumn(name = "shopping_cart_id"))
     private ShoppingCart shoppingCart;
 
     @JsonManagedReference(value = "customer-order")
@@ -91,14 +88,6 @@ public class Customer /*implements UserDetails*/ {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
     }
 
     public List<Order> getOrders() {
