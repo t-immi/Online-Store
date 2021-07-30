@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Customer;
 import ru.kandakov.onlinestore.repository.CustomerRepository;
+import ru.kandakov.onlinestore.service.CustomerService;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class CustomerController {
 
     private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerRepository customerRepository) {
+    public CustomerController(CustomerRepository customerRepository, CustomerService customerService) {
         this.customerRepository = customerRepository;
+        this.customerService = customerService;
     }
 
     @GetMapping("/users")
@@ -34,7 +37,7 @@ public class CustomerController {
     @PutMapping("/create")
     @ResponseBody
     public Customer save(@RequestBody Customer customer) {
-        customerRepository.save(customer);
+        customerService.create(customer);
         return customer;
     }
 

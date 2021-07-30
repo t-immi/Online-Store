@@ -2,8 +2,12 @@ package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.dto.ShoppingCart;
+import ru.kandakov.onlinestore.dto.ShoppingCartGoods;
 import ru.kandakov.onlinestore.repository.ShoppingCartRepository;
+import ru.kandakov.onlinestore.service.CreateOrderByShoppingCartService;
+import ru.kandakov.onlinestore.service.ShoppingCartService;
 
 import java.util.List;
 @RequestMapping("/shopping_cart")
@@ -11,23 +15,25 @@ import java.util.List;
 public class ShoppingCartController {
 
     private final ShoppingCartRepository shoppingCartRepository;
+    private final ShoppingCartService shoppingCartService;
+    private final CreateOrderByShoppingCartService createOrderByShoppingCartService;
 
     @Autowired
-    public ShoppingCartController(ShoppingCartRepository shoppingCartRepository) {
+    public ShoppingCartController(ShoppingCartRepository shoppingCartRepository, ShoppingCartService shoppingCartService, CreateOrderByShoppingCartService createOrderByShoppingCartService) {
         this.shoppingCartRepository = shoppingCartRepository;
-
+        this.shoppingCartService = shoppingCartService;
+        this.createOrderByShoppingCartService = createOrderByShoppingCartService;
     }
 
     @GetMapping("/catalog")
     public List<ShoppingCart> outputShoppingCart() {
-        return shoppingCartRepository.findAll();
+        return shoppingCartService.findAll();
     }
 
     @PutMapping("/create")
     @ResponseBody
-    public ShoppingCart save(@RequestBody ShoppingCart shoppingCart) {
-        shoppingCartRepository.save(shoppingCart);
-        return shoppingCart;
+    public ShoppingCart create(@RequestBody ShoppingCart shoppingCart) {
+        return shoppingCartService.create(shoppingCart);
     }
 
     @PatchMapping("/update")
@@ -42,5 +48,15 @@ public class ShoppingCartController {
     public ShoppingCart delete(@RequestBody ShoppingCart shoppingCart) {
         shoppingCartRepository.delete(shoppingCart);
         return shoppingCart;
+    }
+    @GetMapping("/show/shopping_cart_goods")
+    @ResponseBody
+    public ShoppingCartGoods showShoppingCartGoods(@RequestBody ShoppingCart shoppingCart) {
+        return shoppingCart.getShoppingCartGoods();
+    }
+
+    @PutMapping("/create/order")
+    public Order createOrderByShoppingCart(@RequestBody ShoppingCart shoppingCart){
+        return createOrderByShoppingCartService.CreateOrderByShoppingCart(shoppingCart);
     }
 }

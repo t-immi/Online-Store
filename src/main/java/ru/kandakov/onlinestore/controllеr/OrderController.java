@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.repository.OrderRepository;
+import ru.kandakov.onlinestore.service.OrderService;
 
 import java.util.List;
 
@@ -12,10 +13,12 @@ import java.util.List;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, OrderService orderService) {
         this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
 
     @GetMapping("")
@@ -27,8 +30,7 @@ public class OrderController {
     @PutMapping("/create")
     @ResponseBody
     public Order save(@RequestBody Order order) {
-        orderRepository.save(order);
-        return order;
+        return orderService.create(order);
     }
 
     @PatchMapping("/update")
