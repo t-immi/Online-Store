@@ -2,7 +2,6 @@ package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.kandakov.onlinestore.dto.Product;
 import ru.kandakov.onlinestore.dto.ShoppingCartGoods;
 import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 
@@ -44,9 +43,9 @@ public class ShoppingCartGoodsController {
         shoppingCartGoodsRepository.delete(shoppingCartGoods);
         return shoppingCartGoods;
     }
-    @GetMapping("/product/{id}")
+    @GetMapping("/product")
     @ResponseBody
-    public Product showProduct(@PathVariable long id){
-        return shoppingCartGoodsRepository.getById(id).getProduct();
+    public Long showProduct(@RequestBody ShoppingCartGoods shoppingCartGoods){
+        return shoppingCartGoods.getProductId();
     }
 }

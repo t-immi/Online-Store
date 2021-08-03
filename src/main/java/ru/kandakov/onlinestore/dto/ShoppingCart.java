@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "shopping_cart")
@@ -13,9 +12,6 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long shoppingCartId;
-
-    @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)
-    private Date dateOfCreation = new Date();
 
     @JsonManagedReference(value = "shoppingCartGoods-ShoppingCart")
     @OneToOne (optional = true, cascade=CascadeType.ALL)
@@ -28,14 +24,6 @@ public class ShoppingCart {
 
     public ShoppingCart() {
 
-    }
-
-    public Date getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
     }
 
     public Long getShoppingCartId() {

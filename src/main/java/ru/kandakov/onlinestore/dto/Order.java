@@ -22,9 +22,12 @@ public class Order {
     @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)
     private Date dateOfCreation;
 
+    @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
+    private long customerId;
+
     @JsonBackReference(value = "customer-order")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Customer customer;
 
     @JsonBackReference(value = "orderGoods-order")
@@ -85,5 +88,13 @@ public class Order {
 
     public Order(OrderGoods orderGoods) {
         this.orderGoods = orderGoods;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 }

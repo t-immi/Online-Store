@@ -25,7 +25,7 @@ public class OrderGoods {
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JsonBackReference(value = "product-orderGoods")
-    @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
 
     public OrderGoods() {

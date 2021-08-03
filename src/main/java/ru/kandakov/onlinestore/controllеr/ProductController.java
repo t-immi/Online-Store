@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Product;
 import ru.kandakov.onlinestore.repository.ProductRepository;
 import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
+import ru.kandakov.onlinestore.service.ProductService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/product")
@@ -15,11 +15,13 @@ public class ProductController {
 
     private final ProductRepository productRepository;
     private final ShoppingCartGoodsRepository shoppingCartGoodsRepository;
+    private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductRepository productRepository, ShoppingCartGoodsRepository shoppingCartGoodsRepository) {
+    public ProductController(ProductRepository productRepository, ShoppingCartGoodsRepository shoppingCartGoodsRepository, ProductService productService) {
         this.productRepository = productRepository;
         this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
+        this.productService = productService;
     }
 
     @GetMapping("/catalog")
@@ -28,8 +30,8 @@ public class ProductController {
     }
 
     @GetMapping("/read/{id}")
-    public Optional<Product> show(@PathVariable long id) {
-        return productRepository.findById(id);
+    public Product show(@PathVariable long id) {
+        return productService.getById(id);
     }
 
     @PutMapping("/create")
