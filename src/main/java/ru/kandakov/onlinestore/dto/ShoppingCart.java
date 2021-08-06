@@ -18,8 +18,9 @@ public class ShoppingCart {
     @JoinColumn (name = "shopping_cart_goods_id")
     private ShoppingCartGoods shoppingCartGoods;
 
-    @JsonBackReference (value = "customer-shoppingCart")
-    @OneToOne(optional = false, mappedBy="shoppingCart")
+    @JsonBackReference(value = "customer-shoppingCart")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Customer customer;
 
     public ShoppingCart() {

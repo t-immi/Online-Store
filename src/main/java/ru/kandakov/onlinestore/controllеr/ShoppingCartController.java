@@ -2,6 +2,7 @@ package ru.kandakov.onlinestore.controllеr;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.kandakov.onlinestore.dto.Customer;
 import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.dto.ShoppingCart;
 import ru.kandakov.onlinestore.dto.ShoppingCartGoods;
@@ -53,6 +54,12 @@ public class ShoppingCartController {
     @ResponseBody
     public ShoppingCartGoods showShoppingCartGoods(@RequestBody ShoppingCart shoppingCart) {
         return shoppingCart.getShoppingCartGoods();
+    }
+
+    @GetMapping("/show/customer")
+    @ResponseBody
+    public Customer getCustomerByShoppingCart(@RequestBody ShoppingCart shoppingCart){
+        return shoppingCart.getCustomer();
     }
 
     @PutMapping("/create/order")

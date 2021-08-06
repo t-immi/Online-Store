@@ -1,5 +1,6 @@
 package ru.kandakov.onlinestore.service;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import ru.kandakov.onlinestore.dto.*;
 
@@ -13,39 +14,45 @@ public class CreateOrderByShoppingCartService {
     private final OrderService orderService;
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
+    private final CustomerService customerService;
 
-    public CreateOrderByShoppingCartService(OrderGoodsService orderGoodsService, OrderService orderService, ShoppingCartService shoppingCartService, ProductService productService) {
+    public CreateOrderByShoppingCartService(OrderGoodsService orderGoodsService, OrderService orderService, ShoppingCartService shoppingCartService, ProductService productService, CustomerService customerService) {
         this.orderGoodsService = orderGoodsService;
         this.orderService = orderService;
         this.shoppingCartService = shoppingCartService;
         this.productService = productService;
+        this.customerService = customerService;
     }
 
-    public Order CreateOrderByShoppingCart(ShoppingCart shoppingCart){
+    public Order CreateOrderByShoppingCart(@NotNull ShoppingCart shoppingCart){
         Product product = productService.getById(shoppingCart.getShoppingCartGoods().getProductId());
         Customer customer = shoppingCart.getCustomer();
 
-        int price = product.getPrice();
-        long productId = product.getProductId();
-        long customerId = customer.getCustomerId();
+        if (customer != null && product != null) {
 
-        OrderGoods orderGoods = new OrderGoods();
-        orderGoods.setProduct(product);
-        orderGoods.setProductId(productId);
-        orderGoodsService.create(orderGoods);
+            int price = product.getPrice();
+            long productId = product.getProductId();
+            long customerId = customer.getCustomerId();
 
-        Order order = new Order();
-        order.setOrderGoods(orderGoods);
-        order.setSum(price);
-        order.setDateOfCreation(new Date());
-        order.setStatus("заказ создан");
-        order.setCustomer(customer);
-        order.setCustomerId(customerId);
-        orderService.create(order);
+            OrderGoods orderGoods = new OrderGoods();
+            orderGoods.setProduct(product);
+            orderGoods.setProductId(productId);
+            orderGoodsService.create(orderGoods);
 
-        orderGoods.setOrder(order);
-        orderGoodsService.update(orderGoods);
+            Order order = new Order();
+            order.setOrderGoods(orderGoods);
+            order.setSum(price);
+            order.setDateOfCreation(new Date());
+            order.setStatus("заказ создан");
+            order.setCustomer(customer);
+            order.setCustomerId(customerId);
+            orderService.create(order);
 
-        return order;
+            orderGoods.setOrder(order);
+            orderGoodsService.update(orderGoods);
+
+            return order;
+        }
+        return null;
     }
 }

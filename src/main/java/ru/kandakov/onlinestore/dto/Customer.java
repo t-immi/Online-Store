@@ -25,8 +25,7 @@ public class Customer /*implements UserDetails*/ {
 //    private String passwordConfirm;
 
     @JsonManagedReference(value = "customer-shoppingCart")
-    @OneToOne (optional = false, cascade=CascadeType.ALL)
-//    @JoinTable(name = "customer_shoppingCart", joinColumns = @JoinColumn(name = "shopping_cart_id"))
+    @OneToOne (mappedBy = "customer", optional = false, cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private ShoppingCart shoppingCart;
 
     @JsonManagedReference(value = "customer-order")

@@ -12,8 +12,8 @@ public class ShoppingCartGoods {
     @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long shoppingCartGoodsId;
 
-    @Column(name = "shopping_cart_id", nullable = false, updatable = false, unique = false)
-    private Long shoppingCartId;
+//    @Column(name = "shopping_cart_id", nullable = false, updatable = false, unique = false)
+//    private Long shoppingCartId;
 
     @Column(name = "product_id",  nullable = false, updatable = false, unique = false)
     private Long productId;
@@ -56,13 +56,13 @@ public class ShoppingCartGoods {
         this.shoppingCartGoodsId = shoppingCartGoodsId;
     }
 
-    public Long getShoppingCartId() {
-        return shoppingCartId;
-    }
-
-    public void setShoppingCartId(Long shoppingCartId) {
-        this.shoppingCartId = shoppingCartId;
-    }
+//    public Long getShoppingCartId() {
+//        return shoppingCartId;
+//    }
+//
+//    public void setShoppingCartId(Long shoppingCartId) {
+//        this.shoppingCartId = shoppingCartId;
+//    }
 
     public Long getProductId() {
         return productId;
