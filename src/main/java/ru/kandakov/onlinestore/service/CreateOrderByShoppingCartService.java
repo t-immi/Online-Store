@@ -2,7 +2,10 @@ package ru.kandakov.onlinestore.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-import ru.kandakov.onlinestore.dto.*;
+import ru.kandakov.onlinestore.dto.Order;
+import ru.kandakov.onlinestore.dto.OrderGoods;
+import ru.kandakov.onlinestore.dto.Product;
+import ru.kandakov.onlinestore.dto.ShoppingCart;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -26,29 +29,27 @@ public class CreateOrderByShoppingCartService {
 
     public Order CreateOrderByShoppingCart(@NotNull ShoppingCart shoppingCart){
         Product product = productService.getById(shoppingCart.getShoppingCartGoods().getProductId());
-        Customer customer = shoppingCart.getCustomer();
 
-        if (customer != null && product != null) {
+        if (product != null) {
 
             int price = product.getPrice();
             long productId = product.getProductId();
-            long customerId = customer.getCustomerId();
+            long customerId = shoppingCart.getCustomerId();
 
+            Order order = new Order();
             OrderGoods orderGoods = new OrderGoods();
             orderGoods.setProduct(product);
             orderGoods.setProductId(productId);
+            orderGoods.setOrder(order);
             orderGoodsService.create(orderGoods);
 
-            Order order = new Order();
             order.setOrderGoods(orderGoods);
             order.setSum(price);
             order.setDateOfCreation(new Date());
             order.setStatus("заказ создан");
-            order.setCustomer(customer);
             order.setCustomerId(customerId);
             orderService.create(order);
 
-            orderGoods.setOrder(order);
             orderGoodsService.update(orderGoods);
 
             return order;

@@ -1,6 +1,7 @@
 package ru.kandakov.onlinestore.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,15 +26,20 @@ public class Order {
     @Column(name = "customer_id", nullable = false, updatable = false, unique = true)
     private long customerId;
 
+    @JsonManagedReference(value = "order-orderGoods")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
+    private OrderGoods orderGoods;
+
     @JsonBackReference(value = "customer-order")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Customer customer;
 
-    @JsonBackReference(value = "orderGoods-order")
-    @OneToOne(optional = true,cascade = CascadeType.ALL)
-    @JoinColumn (name = "order_goods_id")
-    private OrderGoods orderGoods;
+//    @JsonBackReference(value = "orderGoods-order")
+//    @OneToOne(optional = true,cascade = CascadeType.ALL)
+//    @JoinColumn (name = "order_goods_id")
+//    private OrderGoods orderGoods;
 
     public Order() {
     }
@@ -78,15 +84,23 @@ public class Order {
         this.status = status;
     }
 
+//    public OrderGoods getOrderGoods() {
+//        return orderGoods;
+//    }
+//
+//    public void setOrderGoods(OrderGoods orderGoods) {
+//        this.orderGoods = orderGoods;
+//    }
+//
+//    public Order(OrderGoods orderGoods) {
+//        this.orderGoods = orderGoods;
+//    }
+
     public OrderGoods getOrderGoods() {
         return orderGoods;
     }
 
     public void setOrderGoods(OrderGoods orderGoods) {
-        this.orderGoods = orderGoods;
-    }
-
-    public Order(OrderGoods orderGoods) {
         this.orderGoods = orderGoods;
     }
 

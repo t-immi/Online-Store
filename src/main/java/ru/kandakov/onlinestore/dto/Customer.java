@@ -18,12 +18,6 @@ public class Customer /*implements UserDetails*/ {
     @Column(name = "name", nullable = false)
     private String name;
 
-//    @Column
-//    private String password;
-//
-//    @Transient
-//    private String passwordConfirm;
-
     @JsonManagedReference(value = "customer-shoppingCart")
     @OneToOne (mappedBy = "customer", optional = false, cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private ShoppingCart shoppingCart;
@@ -39,23 +33,6 @@ public class Customer /*implements UserDetails*/ {
     public Customer() {
 
     }
-
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public String getPasswordConfirm() {
-//        return passwordConfirm;
-//    }
-//
-//    public void setPasswordConfirm(String passwordConfirm) {
-//        this.passwordConfirm = passwordConfirm;
-//    }
-
 
     public Set<CustomerRoles> getCustomerRoles() {
         return customerRoles;
@@ -97,38 +74,4 @@ public class Customer /*implements UserDetails*/ {
         this.orders = orders;
     }
 
-    //    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return null;
-//    }
-//
-//    @Override
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return name;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
 }

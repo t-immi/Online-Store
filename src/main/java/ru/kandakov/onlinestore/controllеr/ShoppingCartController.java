@@ -11,6 +11,8 @@ import ru.kandakov.onlinestore.service.CreateOrderByShoppingCartService;
 import ru.kandakov.onlinestore.service.ShoppingCartService;
 
 import java.util.List;
+import java.util.Optional;
+
 @RequestMapping("/shopping_cart")
 @RestController
 public class ShoppingCartController {
@@ -58,8 +60,8 @@ public class ShoppingCartController {
 
     @GetMapping("/show/customer")
     @ResponseBody
-    public Customer getCustomerByShoppingCart(@RequestBody ShoppingCart shoppingCart){
-        return shoppingCart.getCustomer();
+    public Optional<Customer> getCustomerByShoppingCart(@RequestBody ShoppingCart shoppingCart){
+        return shoppingCartService.findCustomer(shoppingCart.getCustomerId());
     }
 
     @PutMapping("/create/order")

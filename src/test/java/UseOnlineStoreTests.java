@@ -88,7 +88,7 @@ public class UseOnlineStoreTests {
                 .put("/shopping_cart/create/order")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\n \"shoppingCartId\": 1,\n \"dateOfCreation\": \"2012-12-11T20:00:00.000+00:00\",\n \"shoppingCartGoods\": {\n \"shoppingCartGoodsId\": 1,\n \"shoppingCartId\": 1,\n \"productId\": 1\n }\n }");
+                .content("{\n \"shoppingCartId\": 1,\n \"customerId\": 1,\n \"shoppingCartGoods\": {\n \"shoppingCartGoodsId\": 1,\n \"productId\": 1\n }\n }");
 
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());

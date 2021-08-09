@@ -3,6 +3,7 @@ package ru.kandakov.onlinestore.controllеr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Customer;
+import ru.kandakov.onlinestore.dto.ShoppingCart;
 import ru.kandakov.onlinestore.repository.CustomerRepository;
 import ru.kandakov.onlinestore.service.CustomerService;
 
@@ -53,5 +54,10 @@ public class CustomerController {
     public Customer delete(@RequestBody Customer customer) {
         customerRepository.delete(customer);
         return customer;
+    }
+
+    @GetMapping("/show/shopping_cart")
+    public ShoppingCart showShoppingCart(@RequestBody Customer customer){
+        return customer.getShoppingCart();
     }
 }

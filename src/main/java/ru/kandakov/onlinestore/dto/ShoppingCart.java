@@ -13,13 +13,16 @@ public class ShoppingCart {
     @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long shoppingCartId;
 
+    @Column(name = "customer_id", updatable = false, unique = true)
+    private Long customerId;
+
     @JsonManagedReference(value = "shoppingCartGoods-ShoppingCart")
     @OneToOne (optional = true, cascade=CascadeType.ALL)
     @JoinColumn (name = "shopping_cart_goods_id")
     private ShoppingCartGoods shoppingCartGoods;
 
     @JsonBackReference(value = "customer-shoppingCart")
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Customer customer;
 
@@ -49,5 +52,13 @@ public class ShoppingCart {
 
     public void setShoppingCartGoods(ShoppingCartGoods shoppingCartGoods) {
         this.shoppingCartGoods = shoppingCartGoods;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 }

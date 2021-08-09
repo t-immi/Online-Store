@@ -15,7 +15,7 @@ public class ShoppingCartGoods {
 //    @Column(name = "shopping_cart_id", nullable = false, updatable = false, unique = false)
 //    private Long shoppingCartId;
 
-    @Column(name = "product_id",  nullable = false, updatable = false, unique = false)
+    @Column(name = "product_id",  nullable = false, updatable = false)
     private Long productId;
 
     @JsonBackReference(value = "shoppingCartGoods-ShoppingCart")
@@ -23,8 +23,8 @@ public class ShoppingCartGoods {
     @JoinColumn (name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
-    @ManyToOne (optional = false, cascade = CascadeType.ALL)
     @JsonBackReference(value = "product-shoppingCartGoods")
+    @ManyToOne (optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
 
