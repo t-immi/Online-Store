@@ -15,11 +15,13 @@ public class CreateOrderByShoppingCartService {
     private final OrderGoodsService orderGoodsService;
     private final OrderService orderService;
     private final ProductService productService;
+    private final ShoppingCartGoodsService shoppingCartGoodsService;
 
-    public CreateOrderByShoppingCartService(OrderGoodsService orderGoodsService, OrderService orderService, ProductService productService) {
+    public CreateOrderByShoppingCartService(OrderGoodsService orderGoodsService, OrderService orderService, ProductService productService, ShoppingCartGoodsService shoppingCartGoodsService) {
         this.orderGoodsService = orderGoodsService;
         this.orderService = orderService;
         this.productService = productService;
+        this.shoppingCartGoodsService = shoppingCartGoodsService;
     }
 
     public Order CreateOrderByShoppingCart(@NotNull ShoppingCart shoppingCart) {
@@ -50,6 +52,8 @@ public class CreateOrderByShoppingCartService {
         order.setOrderGoodsSet(orderGoodsSet);
         order.setSum(sum);
         orderService.create(order);
+
+        shoppingCartGoodsService.deleteAllByShoppingCart(shoppingCart);
 
         return order;
     }

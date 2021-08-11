@@ -2,6 +2,7 @@ package ru.kandakov.onlinestore.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kandakov.onlinestore.dto.ShoppingCart;
 import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 
 import javax.transaction.Transactional;
@@ -19,5 +20,9 @@ public class ShoppingCartGoodsService {
 
     public void deleteById(Long id) {
         shoppingCartGoodsRepository.deleteById(id);
+    }
+
+    public void deleteAllByShoppingCart(ShoppingCart shoppingCart){
+        shoppingCartGoodsRepository.deleteAllByShoppingCart(shoppingCart);
     }
 }
