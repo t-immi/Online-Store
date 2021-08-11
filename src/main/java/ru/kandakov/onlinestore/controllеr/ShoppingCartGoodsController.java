@@ -6,6 +6,7 @@ import ru.kandakov.onlinestore.dto.ShoppingCartGoods;
 import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 
 import java.util.List;
+
 @RequestMapping("/shopping_cart_goods")
 @RestController
 public class ShoppingCartGoodsController {

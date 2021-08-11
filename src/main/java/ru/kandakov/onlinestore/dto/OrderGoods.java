@@ -20,8 +20,8 @@ public class OrderGoods {
 //    private Order order;
 
     @JsonBackReference(value = "order-orderGoods")
-    @OneToOne(optional = false, mappedBy = "orderGoods")
-    @JoinColumn(name = "order_id")
+    @OneToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Order order;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
@@ -30,7 +30,6 @@ public class OrderGoods {
     private Product product;
 
     public OrderGoods() {
-
     }
 
     public Long getOrderGoodsId() {

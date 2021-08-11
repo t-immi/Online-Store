@@ -12,6 +12,7 @@ import ru.kandakov.onlinestore.service.ShoppingCartService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RequestMapping("/shopping_cart")
 @RestController
@@ -54,8 +55,8 @@ public class ShoppingCartController {
     }
     @GetMapping("/show/shopping_cart_goods")
     @ResponseBody
-    public ShoppingCartGoods showShoppingCartGoods(@RequestBody ShoppingCart shoppingCart) {
-        return shoppingCart.getShoppingCartGoods();
+    public Set<ShoppingCartGoods> showShoppingCartGoods(@RequestBody ShoppingCart shoppingCart) {
+        return shoppingCart.getShoppingCartGoodsSet();
     }
 
     @GetMapping("/show/customer")

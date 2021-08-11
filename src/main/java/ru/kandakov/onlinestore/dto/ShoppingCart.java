@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "shopping_cart")
@@ -17,9 +18,9 @@ public class ShoppingCart {
     private Long customerId;
 
     @JsonManagedReference(value = "shoppingCartGoods-ShoppingCart")
-    @OneToOne (optional = true, cascade=CascadeType.ALL)
-    @JoinColumn (name = "shopping_cart_goods_id")
-    private ShoppingCartGoods shoppingCartGoods;
+    @OneToMany (cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "shoppingCart")
+//    @JoinColumn (name = "shopping_cart_goods_id")
+    private Set<ShoppingCartGoods> shoppingCartGoodsSet;
 
     @JsonBackReference(value = "customer-shoppingCart")
     @OneToOne(optional = false, fetch = FetchType.LAZY)
@@ -46,12 +47,12 @@ public class ShoppingCart {
         this.customer = customer;
     }
 
-    public ShoppingCartGoods getShoppingCartGoods() {
-        return shoppingCartGoods;
+    public Set<ShoppingCartGoods> getShoppingCartGoodsSet() {
+        return shoppingCartGoodsSet;
     }
 
-    public void setShoppingCartGoods(ShoppingCartGoods shoppingCartGoods) {
-        this.shoppingCartGoods = shoppingCartGoods;
+    public void setShoppingCartGoodsSet(Set<ShoppingCartGoods> shoppingCartGoodsSet) {
+        this.shoppingCartGoodsSet = shoppingCartGoodsSet;
     }
 
     public Long getCustomerId() {

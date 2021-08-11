@@ -2,10 +2,7 @@ package ru.kandakov.onlinestore.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-import ru.kandakov.onlinestore.dto.Order;
-import ru.kandakov.onlinestore.dto.OrderGoods;
-import ru.kandakov.onlinestore.dto.Product;
-import ru.kandakov.onlinestore.dto.ShoppingCart;
+import ru.kandakov.onlinestore.dto.*;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -28,32 +25,32 @@ public class CreateOrderByShoppingCartService {
     }
 
     public Order CreateOrderByShoppingCart(@NotNull ShoppingCart shoppingCart){
-        Product product = productService.getById(shoppingCart.getShoppingCartGoods().getProductId());
 
-        if (product != null) {
+        long customerId = shoppingCart.getCustomerId();
+        int sum = 0;
 
-            int price = product.getPrice();
-            long productId = product.getProductId();
-            long customerId = shoppingCart.getCustomerId();
+        Order order = new Order();
+        order.setCustomerId(customerId);
+        order.setDateOfCreation(new Date());
+        order.setStatus("заказ создан");
 
-            Order order = new Order();
-            OrderGoods orderGoods = new OrderGoods();
-            orderGoods.setProduct(product);
-            orderGoods.setProductId(productId);
-            orderGoods.setOrder(order);
-            orderGoodsService.create(orderGoods);
+        for (ShoppingCartGoods shoppingCartGoods: shoppingCart.getShoppingCartGoodsSet()) {
+            Product product = productService.getById(shoppingCartGoods.getProductId());
+            if (product != null) {
+                sum += product.getPrice();
+                long productId = product.getProductId();
 
-            order.setOrderGoods(orderGoods);
-            order.setSum(price);
-            order.setDateOfCreation(new Date());
-            order.setStatus("заказ создан");
-            order.setCustomerId(customerId);
-            orderService.create(order);
-
-            orderGoodsService.update(orderGoods);
-
-            return order;
+                OrderGoods orderGoods = new OrderGoods();
+                orderGoods.setProduct(product);
+                orderGoods.setProductId(productId);
+                orderGoods.setOrder(order);
+                orderGoodsService.create(orderGoods);
+                order.setOrderGoods(orderGoods);
+            }
         }
-        return null;
+        order.setSum(sum);
+        orderService.create(order);
+
+        return order;
     }
 }

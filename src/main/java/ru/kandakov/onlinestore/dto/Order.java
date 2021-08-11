@@ -27,7 +27,7 @@ public class Order {
     private long customerId;
 
     @JsonManagedReference(value = "order-orderGoods")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order")
     @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
     private OrderGoods orderGoods;
 
