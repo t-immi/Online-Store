@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @GetMapping("/read/min/{label}")
-    public List<Product> readMinPrice(@PathVariable String label){
+    public List<Product> readMinPrice(@PathVariable String label) {
         return productRepository.findAllByLabelOrderByPriceAsc(label);
     }
 }

@@ -6,5 +6,5 @@ import ru.kandakov.onlinestore.dto.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    Customer findByName(String name);
+
 }

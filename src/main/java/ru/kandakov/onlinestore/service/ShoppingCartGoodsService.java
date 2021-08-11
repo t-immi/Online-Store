@@ -13,11 +13,11 @@ public class ShoppingCartGoodsService {
     private final ShoppingCartGoodsRepository shoppingCartGoodsRepository;
 
     @Autowired
-    public ShoppingCartGoodsService(ShoppingCartGoodsRepository shoppingCartGoodsRepository){
+    public ShoppingCartGoodsService(ShoppingCartGoodsRepository shoppingCartGoodsRepository) {
         this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         shoppingCartGoodsRepository.deleteById(id);
     }
 }

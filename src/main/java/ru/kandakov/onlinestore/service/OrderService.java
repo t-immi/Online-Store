@@ -14,11 +14,11 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository){
+    public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
-    public Order create(Order order){
+    public Order create(Order order) {
         orderRepository.save(order);
         return order;
     }

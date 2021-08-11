@@ -12,7 +12,7 @@ public class TestController {
 
     @RequestMapping("/test")
     @ResponseBody
-    public List<Integer> outputTest(){
+    public List<Integer> outputTest() {
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);

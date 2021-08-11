@@ -14,15 +14,16 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository){
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public Product create(Product product){
+    public Product create(Product product) {
         productRepository.save(product);
         return product;
     }
-    public Product getById(Long id){
+
+    public Product getById(Long id) {
         Product product = productRepository.getById(id);
         return product;
     }

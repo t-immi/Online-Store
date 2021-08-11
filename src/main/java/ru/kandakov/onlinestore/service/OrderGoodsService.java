@@ -14,14 +14,15 @@ public class OrderGoodsService {
     private final OrderGoodsRepository orderGoodsRepository;
 
     @Autowired
-    public OrderGoodsService(OrderGoodsRepository orderGoodsRepository){
+    public OrderGoodsService(OrderGoodsRepository orderGoodsRepository) {
         this.orderGoodsRepository = orderGoodsRepository;
     }
 
-    public OrderGoods create(OrderGoods orderGoods){
+    public OrderGoods create(OrderGoods orderGoods) {
         orderGoodsRepository.save(orderGoods);
         return orderGoods;
     }
+
     public OrderGoods update(OrderGoods orderGoods) {
         orderGoodsRepository.save(orderGoods);
         return orderGoods;

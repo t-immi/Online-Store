@@ -53,6 +53,7 @@ public class ShoppingCartController {
         shoppingCartRepository.delete(shoppingCart);
         return shoppingCart;
     }
+
     @GetMapping("/show/shopping_cart_goods")
     @ResponseBody
     public Set<ShoppingCartGoods> showShoppingCartGoods(@RequestBody ShoppingCart shoppingCart) {
@@ -61,12 +62,12 @@ public class ShoppingCartController {
 
     @GetMapping("/show/customer")
     @ResponseBody
-    public Optional<Customer> getCustomerByShoppingCart(@RequestBody ShoppingCart shoppingCart){
+    public Optional<Customer> getCustomerByShoppingCart(@RequestBody ShoppingCart shoppingCart) {
         return shoppingCartService.findCustomer(shoppingCart.getCustomerId());
     }
 
     @PutMapping("/create/order")
-    public Order createOrderByShoppingCart(@RequestBody ShoppingCart shoppingCart){
+    public Order createOrderByShoppingCart(@RequestBody ShoppingCart shoppingCart) {
         return createOrderByShoppingCartService.CreateOrderByShoppingCart(shoppingCart);
     }
 }

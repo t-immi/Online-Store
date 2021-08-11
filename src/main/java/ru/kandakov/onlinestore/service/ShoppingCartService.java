@@ -19,21 +19,22 @@ public class ShoppingCartService {
     private final CustomerRepository customerRepository;
 
     @Autowired
-    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository, CustomerRepository customerRepository){
+    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository, CustomerRepository customerRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.customerRepository = customerRepository;
     }
 
-    public ShoppingCart create(ShoppingCart shoppingCart){
+    public ShoppingCart create(ShoppingCart shoppingCart) {
         shoppingCartRepository.save(shoppingCart);
         return shoppingCart;
     }
 
-    public ShoppingCart update(ShoppingCart shoppingCart){
+    public ShoppingCart update(ShoppingCart shoppingCart) {
         shoppingCartRepository.save(shoppingCart);
         return shoppingCart;
     }
-    public List<ShoppingCart> findAll(){
+
+    public List<ShoppingCart> findAll() {
         return shoppingCartRepository.findAll();
     }
 

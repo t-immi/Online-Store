@@ -6,6 +6,7 @@ import ru.kandakov.onlinestore.dto.OrderGoods;
 import ru.kandakov.onlinestore.repository.OrderGoodsRepository;
 
 import java.util.List;
+
 @RequestMapping("/order_goods")
 @RestController
 public class OrderGoodsController {
@@ -19,7 +20,7 @@ public class OrderGoodsController {
 
     @GetMapping("")
     @ResponseBody
-    public List<OrderGoods> outputOrderGoods(){
+    public List<OrderGoods> outputOrderGoods() {
         return orderGoodsRepository.findAll();
     }
 

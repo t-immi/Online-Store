@@ -37,7 +37,7 @@ public class CustomerControllerTests {
 
     @WithMockUser(username = "user1", password = "user1Pass")
     @Test
-    public void testForSuccessfulUsersTransfer () throws Exception {
+    public void testForSuccessfulUsersTransfer() throws Exception {
 
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/customer/users");
@@ -48,16 +48,17 @@ public class CustomerControllerTests {
 
     @WithMockUser(username = "user1", password = "user1Pass")
     @Test
-    public void testForSuccessfulUserTransfer () throws Exception {
+    public void testForSuccessfulUserTransfer() throws Exception {
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/customer/read/1");
 
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
     @Test
     @WithMockUser(username = "user1", password = "user1Pass")
-    public void testForSuccessfulUserCreate () throws Exception {
+    public void testForSuccessfulUserCreate() throws Exception {
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .put("/customer/create")
                 .with(csrf())
@@ -67,9 +68,10 @@ public class CustomerControllerTests {
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
     @WithMockUser(username = "user1", password = "user1Pass")
     @Test
-    public void testForUnSuccessfulUserCreate () throws Exception {
+    public void testForUnSuccessfulUserCreate() throws Exception {
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .put("/customer/create")
                 .with(csrf())
@@ -79,9 +81,10 @@ public class CustomerControllerTests {
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
+
     @WithMockUser(username = "user1", password = "user1Pass")
     @Test
-    public void testForSuccessfulUserDelete () throws Exception {
+    public void testForSuccessfulUserDelete() throws Exception {
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .delete("/customer/delete")
                 .with(csrf())
@@ -91,9 +94,10 @@ public class CustomerControllerTests {
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
     @WithMockUser(username = "user1", password = "user1Pass")
     @Test
-    public void testForUnSuccessfulUserDelete () throws Exception {
+    public void testForUnSuccessfulUserDelete() throws Exception {
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .delete("/customer/delete")
                 .with(csrf())

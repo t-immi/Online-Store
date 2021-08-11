@@ -14,11 +14,11 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository){
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
-    public Customer create(Customer customer){
+    public Customer create(Customer customer) {
         customerRepository.save(customer);
         return customer;
     }

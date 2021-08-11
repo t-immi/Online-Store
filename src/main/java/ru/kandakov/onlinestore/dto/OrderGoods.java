@@ -15,13 +15,9 @@ public class OrderGoods {
     @Column(name = "product_id", nullable = false, updatable = false)
     private Long productId;
 
-//    @JsonManagedReference(value = "orderGoods-order")
-//    @OneToOne(optional = true, mappedBy = "orderGoods")
-//    private Order order;
-
     @JsonBackReference(value = "order-orderGoods")
-    @OneToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", insertable = false, updatable = true)
     private Order order;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
@@ -40,20 +36,20 @@ public class OrderGoods {
         this.orderGoodsId = orderGoodsId;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
     public Product getProduct() {
         return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public Order getOrder() {
@@ -63,17 +59,5 @@ public class OrderGoods {
     public void setOrder(Order order) {
         this.order = order;
     }
-
-    //    public Order getOrder() {
-//        return order;
-//    }
-//
-//    public void setOrder(Order order) {
-//        this.order = order;
-//    }
-//
-//    public OrderGoods(Order order) {
-//        this.order = order;
-//    }
 
 }

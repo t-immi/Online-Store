@@ -10,18 +10,18 @@ import java.util.List;
 @RestController
 public class RoleController {
 
-     private final RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-     @Autowired
-     public RoleController(RoleRepository roleRepository) {
-         this.roleRepository = roleRepository;
-     }
+    @Autowired
+    public RoleController(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
-     @GetMapping("/roles")
-     @ResponseBody
-     public List<Role> outputRoles(){
-         return roleRepository.findAll();
-     }
+    @GetMapping("/roles")
+    @ResponseBody
+    public List<Role> outputRoles() {
+        return roleRepository.findAll();
+    }
 
     @PutMapping("/role/create")
     @ResponseBody

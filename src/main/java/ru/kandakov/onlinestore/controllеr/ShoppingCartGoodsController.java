@@ -20,13 +20,13 @@ public class ShoppingCartGoodsController {
 
     @GetMapping("/catalog")
     @ResponseBody
-    public List<ShoppingCartGoods> outputShoppingCartGoods(){
+    public List<ShoppingCartGoods> outputShoppingCartGoods() {
         return shoppingCartGoodsRepository.findAll();
     }
 
     @PutMapping("/create")
     @ResponseBody
-    public ShoppingCartGoods save(@RequestBody  ShoppingCartGoods shoppingCartGoods) {
+    public ShoppingCartGoods save(@RequestBody ShoppingCartGoods shoppingCartGoods) {
         shoppingCartGoodsRepository.save(shoppingCartGoods);
         return shoppingCartGoods;
     }
@@ -44,9 +44,10 @@ public class ShoppingCartGoodsController {
         shoppingCartGoodsRepository.delete(shoppingCartGoods);
         return shoppingCartGoods;
     }
+
     @GetMapping("/product")
     @ResponseBody
-    public Long showProduct(@RequestBody ShoppingCartGoods shoppingCartGoods){
+    public Long showProduct(@RequestBody ShoppingCartGoods shoppingCartGoods) {
         return shoppingCartGoods.getProductId();
     }
 }

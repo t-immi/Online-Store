@@ -18,7 +18,7 @@ public class ShoppingCart {
     private Long customerId;
 
     @JsonManagedReference(value = "shoppingCartGoods-ShoppingCart")
-    @OneToMany (cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "shoppingCart")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "shoppingCart")
 //    @JoinColumn (name = "shopping_cart_goods_id")
     private Set<ShoppingCartGoods> shoppingCartGoodsSet;
 

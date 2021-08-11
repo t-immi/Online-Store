@@ -57,7 +57,7 @@ public class CustomerController {
     }
 
     @GetMapping("/show/shopping_cart")
-    public ShoppingCart showShoppingCart(@RequestBody Customer customer){
+    public ShoppingCart showShoppingCart(@RequestBody Customer customer) {
         return customer.getShoppingCart();
     }
 }

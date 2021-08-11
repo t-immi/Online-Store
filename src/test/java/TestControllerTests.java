@@ -24,7 +24,7 @@ public class TestControllerTests {
 
     @WithMockUser(username = "user1", password = "user1Pass")
     @Test
-    public void testForSuccessfulTransfer () throws Exception {
+    public void testForSuccessfulTransfer() throws Exception {
 
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/test");

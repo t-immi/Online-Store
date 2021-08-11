@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "online_order") //Таблицу нельзя называть order
@@ -27,19 +28,14 @@ public class Order {
     private long customerId;
 
     @JsonManagedReference(value = "order-orderGoods")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order")
-    @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
-    private OrderGoods orderGoods;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order")
+//    @JoinColumn(name = "order_goods_id", insertable = false, updatable = false)
+    private Set<OrderGoods> orderGoodsSet;
 
     @JsonBackReference(value = "customer-order")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Customer customer;
-
-//    @JsonBackReference(value = "orderGoods-order")
-//    @OneToOne(optional = true,cascade = CascadeType.ALL)
-//    @JoinColumn (name = "order_goods_id")
-//    private OrderGoods orderGoods;
 
     public Order() {
     }
@@ -84,24 +80,12 @@ public class Order {
         this.status = status;
     }
 
-//    public OrderGoods getOrderGoods() {
-//        return orderGoods;
-//    }
-//
-//    public void setOrderGoods(OrderGoods orderGoods) {
-//        this.orderGoods = orderGoods;
-//    }
-//
-//    public Order(OrderGoods orderGoods) {
-//        this.orderGoods = orderGoods;
-//    }
-
-    public OrderGoods getOrderGoods() {
-        return orderGoods;
+    public Set<OrderGoods> getOrderGoodsSet() {
+        return orderGoodsSet;
     }
 
-    public void setOrderGoods(OrderGoods orderGoods) {
-        this.orderGoods = orderGoods;
+    public void setOrderGoodsSet(Set<OrderGoods> orderGoodsSet) {
+        this.orderGoodsSet = orderGoodsSet;
     }
 
     public long getCustomerId() {

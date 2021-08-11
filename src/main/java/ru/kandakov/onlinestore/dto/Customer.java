@@ -19,7 +19,7 @@ public class Customer /*implements UserDetails*/ {
     private String name;
 
     @JsonManagedReference(value = "customer-shoppingCart")
-    @OneToOne (mappedBy = "customer", optional = false, cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "customer", optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ShoppingCart shoppingCart;
 
     @JsonManagedReference(value = "customer-order")

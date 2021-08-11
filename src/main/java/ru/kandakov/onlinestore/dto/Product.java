@@ -23,7 +23,7 @@ public class Product {
     @JsonManagedReference(value = "product-orderGoods")
     private Collection<OrderGoods> orderGoods;
 
-    @OneToMany (mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonManagedReference(value = "product-shoppingCartGoods")
     private Collection<ShoppingCartGoods> shoppingCartGoods;
 
@@ -70,7 +70,6 @@ public class Product {
     public void setPrice(int price) {
         this.price = price;
     }
-
 
 
 }
