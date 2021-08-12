@@ -16,8 +16,6 @@ import ru.kandakov.onlinestore.OnlineStoreApplication;
 import ru.kandakov.onlinestore.controllеr.CustomerController;
 import ru.kandakov.onlinestore.controllеr.ShoppingCartController;
 import ru.kandakov.onlinestore.repository.CustomerRepository;
-import ru.kandakov.onlinestore.repository.OrderGoodsRepository;
-import ru.kandakov.onlinestore.repository.OrderRepository;
 import ru.kandakov.onlinestore.repository.ShoppingCartRepository;
 import ru.kandakov.onlinestore.service.CreateOrderByShoppingCartService;
 import ru.kandakov.onlinestore.service.CustomerService;
@@ -35,6 +33,9 @@ public class UseOnlineStoreTests {
     private MockMvc mockMvc;
 
     @MockBean
+    private CreateOrderByShoppingCartService createOrderByShoppingCartService;
+
+    @MockBean
     private CustomerService customerService;
 
     @MockBean
@@ -46,14 +47,6 @@ public class UseOnlineStoreTests {
     @MockBean
     private ShoppingCartRepository shoppingCartRepository;
 
-    @MockBean
-    private OrderGoodsRepository orderGoodsRepository;
-
-    @MockBean
-    private OrderRepository orderRepository;
-
-    @MockBean
-    private CreateOrderByShoppingCartService createOrderByShoppingCartService;
 
     @WithMockUser(username = "user1", password = "user1Pass")
     @Test

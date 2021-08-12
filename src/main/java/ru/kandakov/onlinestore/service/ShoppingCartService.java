@@ -41,4 +41,9 @@ public class ShoppingCartService {
     public Optional<Customer> findCustomer(Long id) {
         return customerRepository.findById(id);
     }
+
+    public ShoppingCart delete(ShoppingCart shoppingCart) {
+        shoppingCartRepository.delete(shoppingCart);
+        return shoppingCart;
+    }
 }

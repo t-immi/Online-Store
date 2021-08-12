@@ -3,7 +3,6 @@ package ru.kandakov.onlinestore.controllеr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Order;
-import ru.kandakov.onlinestore.repository.OrderRepository;
 import ru.kandakov.onlinestore.service.OrderService;
 
 import java.util.List;
@@ -12,19 +11,17 @@ import java.util.List;
 @RestController
 public class OrderController {
 
-    private final OrderRepository orderRepository;
     private final OrderService orderService;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository, OrderService orderService) {
-        this.orderRepository = orderRepository;
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
     @GetMapping("")
     @ResponseBody
     public List<Order> outputOrders() {
-        return orderRepository.findAll();
+        return orderService.findAll();
     }
 
     @PutMapping("/create")
@@ -36,14 +33,12 @@ public class OrderController {
     @PatchMapping("/update")
     @ResponseBody
     public Order update(@RequestBody Order order) {
-        orderRepository.save(order);
-        return order;
+        return orderService.update(order);
     }
 
     @DeleteMapping("/delete")
     @ResponseBody
     public Order delete(@RequestBody Order order) {
-        orderRepository.delete(order);
-        return order;
+        return orderService.delete(order);
     }
 }

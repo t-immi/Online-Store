@@ -6,7 +6,6 @@ import ru.kandakov.onlinestore.dto.Customer;
 import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.dto.ShoppingCart;
 import ru.kandakov.onlinestore.dto.ShoppingCartGoods;
-import ru.kandakov.onlinestore.repository.ShoppingCartRepository;
 import ru.kandakov.onlinestore.service.CreateOrderByShoppingCartService;
 import ru.kandakov.onlinestore.service.ShoppingCartService;
 
@@ -18,13 +17,11 @@ import java.util.Set;
 @RestController
 public class ShoppingCartController {
 
-    private final ShoppingCartRepository shoppingCartRepository;
     private final ShoppingCartService shoppingCartService;
     private final CreateOrderByShoppingCartService createOrderByShoppingCartService;
 
     @Autowired
-    public ShoppingCartController(ShoppingCartRepository shoppingCartRepository, ShoppingCartService shoppingCartService, CreateOrderByShoppingCartService createOrderByShoppingCartService) {
-        this.shoppingCartRepository = shoppingCartRepository;
+    public ShoppingCartController(ShoppingCartService shoppingCartService, CreateOrderByShoppingCartService createOrderByShoppingCartService) {
         this.shoppingCartService = shoppingCartService;
         this.createOrderByShoppingCartService = createOrderByShoppingCartService;
     }
@@ -43,15 +40,14 @@ public class ShoppingCartController {
     @PatchMapping("/update")
     @ResponseBody
     public ShoppingCart update(@RequestBody ShoppingCart shoppingCart) {
-        shoppingCartRepository.save(shoppingCart);
+        shoppingCartService.create(shoppingCart);
         return shoppingCart;
     }
 
     @DeleteMapping("/delete")
     @ResponseBody
     public ShoppingCart delete(@RequestBody ShoppingCart shoppingCart) {
-        shoppingCartRepository.delete(shoppingCart);
-        return shoppingCart;
+        return shoppingCartService.delete(shoppingCart);
     }
 
     @GetMapping("/show/shopping_cart_goods")

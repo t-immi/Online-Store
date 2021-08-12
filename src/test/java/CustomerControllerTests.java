@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.kandakov.onlinestore.OnlineStoreApplication;
 import ru.kandakov.onlinestore.controllеr.CustomerController;
-import ru.kandakov.onlinestore.repository.CustomerRepository;
 import ru.kandakov.onlinestore.service.CustomerService;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -28,9 +27,6 @@ public class CustomerControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private CustomerRepository customerRepository;
 
     @MockBean
     private CustomerService customerService;

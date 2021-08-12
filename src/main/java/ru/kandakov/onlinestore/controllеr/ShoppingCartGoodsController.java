@@ -3,7 +3,7 @@ package ru.kandakov.onlinestore.controllеr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.ShoppingCartGoods;
-import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
+import ru.kandakov.onlinestore.service.ShoppingCartGoodsService;
 
 import java.util.List;
 
@@ -11,37 +11,37 @@ import java.util.List;
 @RestController
 public class ShoppingCartGoodsController {
 
-    private final ShoppingCartGoodsRepository shoppingCartGoodsRepository;
+    private final ShoppingCartGoodsService shoppingCartGoodsService;
 
     @Autowired
-    public ShoppingCartGoodsController(ShoppingCartGoodsRepository shoppingCartGoodsRepository) {
-        this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
+    public ShoppingCartGoodsController(ShoppingCartGoodsService shoppingCartService) {
+        this.shoppingCartGoodsService = shoppingCartService;
     }
 
     @GetMapping("/catalog")
     @ResponseBody
     public List<ShoppingCartGoods> outputShoppingCartGoods() {
-        return shoppingCartGoodsRepository.findAll();
+        return shoppingCartGoodsService.findAll();
     }
 
     @PutMapping("/create")
     @ResponseBody
     public ShoppingCartGoods save(@RequestBody ShoppingCartGoods shoppingCartGoods) {
-        shoppingCartGoodsRepository.save(shoppingCartGoods);
+        shoppingCartGoodsService.save(shoppingCartGoods);
         return shoppingCartGoods;
     }
 
     @PatchMapping("/update")
     @ResponseBody
     public ShoppingCartGoods update(@RequestBody ShoppingCartGoods shoppingCartGoods) {
-        shoppingCartGoodsRepository.save(shoppingCartGoods);
+        shoppingCartGoodsService.save(shoppingCartGoods);
         return shoppingCartGoods;
     }
 
     @DeleteMapping("/delete")
     @ResponseBody
     public ShoppingCartGoods delete(@RequestBody ShoppingCartGoods shoppingCartGoods) {
-        shoppingCartGoodsRepository.delete(shoppingCartGoods);
+        shoppingCartGoodsService.delete(shoppingCartGoods);
         return shoppingCartGoods;
     }
 

@@ -3,8 +3,6 @@ package ru.kandakov.onlinestore.controllеr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Product;
-import ru.kandakov.onlinestore.repository.ProductRepository;
-import ru.kandakov.onlinestore.repository.ShoppingCartGoodsRepository;
 import ru.kandakov.onlinestore.service.ProductService;
 
 import java.util.List;
@@ -13,20 +11,16 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    private final ProductRepository productRepository;
-    private final ShoppingCartGoodsRepository shoppingCartGoodsRepository;
     private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductRepository productRepository, ShoppingCartGoodsRepository shoppingCartGoodsRepository, ProductService productService) {
-        this.productRepository = productRepository;
-        this.shoppingCartGoodsRepository = shoppingCartGoodsRepository;
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/catalog")
     public List<Product> outputProducts() {
-        return productRepository.findAll();
+        return productService.findAll();
     }
 
     @GetMapping("/read/{id}")
@@ -37,27 +31,23 @@ public class ProductController {
     @PutMapping("/create")
     @ResponseBody
     public Product save(@RequestBody Product product) {
-        productRepository.save(product);
-        return product;
+        return productService.create(product);
     }
 
     @PatchMapping("/update")
     @ResponseBody
     public Product update(@RequestBody Product product) {
-        productRepository.save(product);
-        return product;
+        return productService.create(product);
     }
 
     @DeleteMapping("/delete")
     @ResponseBody
     public Product delete(@RequestBody Product product) {
-        shoppingCartGoodsRepository.deleteAll(product.getShoppingCartGoods());
-        productRepository.delete(product);
-        return product;
+        return productService.delete(product);
     }
 
     @GetMapping("/read/min/{label}")
     public List<Product> readMinPrice(@PathVariable String label) {
-        return productRepository.findAllByLabelOrderByPriceAsc(label);
+        return productService.findAllByLabelOrderByPriceAsc(label);
     }
 }

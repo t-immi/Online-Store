@@ -18,7 +18,7 @@ public class Order {
     @Column(name = "sum", nullable = false, updatable = false, unique = true)
     private int sum;
 
-    @Column(name = "status", updatable = false, unique = true)
+    @Column(name = "status", updatable = false, unique = false)
     private String status;
 
     @Column(name = "date_of_creation", nullable = false, updatable = false, unique = true)

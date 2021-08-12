@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.kandakov.onlinestore.dto.Customer;
 import ru.kandakov.onlinestore.dto.ShoppingCart;
-import ru.kandakov.onlinestore.repository.CustomerRepository;
 import ru.kandakov.onlinestore.service.CustomerService;
 
 import java.util.List;
@@ -14,25 +13,23 @@ import java.util.Optional;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerRepository customerRepository;
     private final CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerRepository customerRepository, CustomerService customerService) {
-        this.customerRepository = customerRepository;
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @GetMapping("/users")
     @ResponseBody
     public List<Customer> outputUsers() {
-        return customerRepository.findAll();
+        return customerService.findAll();
     }
 
     @GetMapping("/read/{id}")
     @ResponseBody
     public Optional<Customer> show(@PathVariable long id) {
-        return customerRepository.findById(id);
+        return customerService.findById(id);
     }
 
     @PutMapping("/create")
@@ -45,15 +42,13 @@ public class CustomerController {
     @PatchMapping("/update")
     @ResponseBody
     public Customer update(@RequestBody Customer customer) {
-        customerRepository.save(customer);
-        return customer;
+        return customerService.save(customer);
     }
 
     @DeleteMapping("/delete")
     @ResponseBody
     public Customer delete(@RequestBody Customer customer) {
-        customerRepository.delete(customer);
-        return customer;
+        return customerService.delete(customer);
     }
 
     @GetMapping("/show/shopping_cart")

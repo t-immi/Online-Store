@@ -6,6 +6,7 @@ import ru.kandakov.onlinestore.dto.Order;
 import ru.kandakov.onlinestore.repository.OrderRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -19,7 +20,19 @@ public class OrderService {
     }
 
     public Order create(Order order) {
-        orderRepository.save(order);
+         return orderRepository.save(order);
+    }
+
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
+
+    public Order update(Order order) {
+        return orderRepository.save(order);
+    }
+
+    public Order delete(Order order) {
+        orderRepository.delete(order);
         return order;
     }
 }
